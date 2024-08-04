@@ -209,6 +209,14 @@ table1(~ Edad + Sexo + `Enfermedad sistémica` + Fumador + `Año de atención de
        render.categorical = prop_freq_ci,
        caption = "Tabla 2: Características clínicas y sociodemográficas de los pacientes según tipo de cirugía",
        footnote = "Nota: Variables numéricas: Media (Desviación Estandar) [Intervalo de confianza 95%], Variables categóricas: Fecuencia absoluta (Porcentaje) [Intervalo de confianza 95%]")
+
+table1(~ `Zona del implante` + `Sector del Implante`  + `Longitud del implante` + `Diámetro del Implante` + `Desviación angular` + `Desviación  coronal` + `Desviación apical` +  `Desviación de profundidad` | `Tipo de cirugía`, 
+       data = cleandata, 
+       overall = "Total",
+       render.continuous = mean_sd_ci,
+       render.categorical = prop_freq_ci,
+       caption = "Tabla 3: Características de los implantes según tipo de cirugía",
+       footnote = "Nota: Variables numéricas: Media (Desviación Estandar) [Intervalo de confianza 95%], Variables categóricas: Fecuencia absoluta (Porcentaje) [Intervalo de confianza 95%]")
 ```
 
 
