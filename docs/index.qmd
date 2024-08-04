@@ -178,6 +178,8 @@ Todos los datos se analizaron mediante pruebas de dos colas con un nivel de sign
 ## Análisis descriptivo
 
 ```{r}
+groupdata <- cleandata %>% dplyr::select(c(1:7,9)) %>% distinct()
+
 # Custom rendering functions with bold variable names
 mean_sd_ci <- function(x, ...) {
   mean_val <- mean(x, na.rm = TRUE)
@@ -214,11 +216,13 @@ prop_freq_ci <- function(x, ...) {
 }
 
 # Create the table using table1
-table1(~ Edad + Sexo + `Enfermedad sistémica` + Fumador + `Año del estudiante de IBM` | `Tipo de cirugía`, 
-       data = cleandata, 
+table1(~ Edad + Sexo + `Enfermedad sistémica` + Fumador + `Año de atención de la especialidad de IBM` | `Tipo de cirugía`, 
+       data = groupdata, 
        overall = "Total",
        render.continuous = mean_sd_ci,
        render.categorical = prop_freq_ci,
        caption = "Tabla 2: Características clínicas y sociodemográficas de los pacientes según tipo de cirugía",
        footnote = "Nota: Variables numéricas: Media (Desviación Estandar) [Intervalo de confianza 95%], Variables categóricas: Fecuencia absoluta (Porcentaje) [Intervalo de confianza 95%]")
 ```
+
+
