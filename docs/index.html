@@ -171,28 +171,24 @@ caption {
 <div class="cell">
 <details class="code-fold">
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary packages</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>install_and_load_packages <span class="ot">&lt;-</span> <span class="cf">function</span>(packages) {</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (package <span class="cf">in</span> packages) {</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Comprueba si el paquete está instalado</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(package, <span class="at">character.only =</span> <span class="cn">TRUE</span>)) {</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Instala el paquete si no está instalado</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">install.packages</span>(package)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Carga el paquete después de instalarlo</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">library</span>(package, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>install_and_load_packages <span class="ot">&lt;-</span> <span class="cf">function</span>(packages) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (package <span class="cf">in</span> packages) {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(package, <span class="at">character.only =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">install.packages</span>(package)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">library</span>(package, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>necessary_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"haven"</span>, <span class="st">"knitr"</span>, <span class="st">"readxl"</span>, <span class="st">"tidyverse"</span>,<span class="st">"Hmisc"</span>, <span class="st">"data.table"</span>, <span class="st">"survey"</span>, <span class="st">"scales"</span>,<span class="st">"gt"</span>,<span class="st">"FactoMineR"</span>,<span class="st">"factoextra"</span>,<span class="st">"vcd"</span>,<span class="st">"reshape2"</span>,<span class="st">"corrplot"</span>,<span class="st">"klaR"</span>, <span class="st">"stringr"</span>,<span class="st">"table1"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">install_and_load_packages</span>(necessary_packages)</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>necessary_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"haven"</span>, <span class="st">"knitr"</span>, <span class="st">"readxl"</span>, <span class="st">"tidyverse"</span>,<span class="st">"Hmisc"</span>, <span class="st">"data.table"</span>, <span class="st">"survey"</span>, <span class="st">"scales"</span>,<span class="st">"gt"</span>,<span class="st">"FactoMineR"</span>,<span class="st">"factoextra"</span>,<span class="st">"vcd"</span>,<span class="st">"reshape2"</span>,<span class="st">"corrplot"</span>,<span class="st">"klaR"</span>, <span class="st">"stringr"</span>,<span class="st">"table1"</span>)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">install_and_load_packages</span>(necessary_packages)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">echo =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">warning =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">message =</span> <span class="cn">FALSE</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">echo =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">warning =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">message =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
@@ -211,7 +207,7 @@ caption {
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Tipo de Variable (Informática)"</span> <span class="ot">=</span> <span class="fu">character</span>(),</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Datos perdidos"</span> <span class="ot">=</span> <span class="fu">integer</span>(),</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">check.names =</span> <span class="cn">FALSE</span>  <span class="co"># Para evitar la sustitución automática de caracteres en los nombres</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (col_name <span class="cf">in</span> col_names) {</span>
@@ -229,15 +225,13 @@ caption {
 <span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Tipo de Variable (Informática)"</span> <span class="ot">=</span> column_class,</span>
 <span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Datos perdidos"</span> <span class="ot">=</span> NA_count,</span>
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>      <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>      <span class="at">check.names =</span> <span class="cn">FALSE</span>  <span class="co"># Para evitar la sustitución automática de caracteres en los nombres</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>      <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
 <span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    ))</span>
 <span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Reemplazar puntos por espacios en los nombres de las columnas</span></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(summary_df) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">."</span>, <span class="st">" "</span>, <span class="fu">names</span>(summary_df))</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(summary_df)</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(summary_df) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">."</span>, <span class="st">" "</span>, <span class="fu">names</span>(summary_df))</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(summary_df)</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -277,23 +271,23 @@ caption {
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_caption</span>(<span class="at">caption =</span> <span class="st">"Tabla 1: Resumen de las variables y tipo informático."</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="iswowyudjc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#iswowyudjc table {
+<div id="ogdzzfqscc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ogdzzfqscc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#iswowyudjc thead, #iswowyudjc tbody, #iswowyudjc tfoot, #iswowyudjc tr, #iswowyudjc td, #iswowyudjc th {
+#ogdzzfqscc thead, #ogdzzfqscc tbody, #ogdzzfqscc tfoot, #ogdzzfqscc tr, #ogdzzfqscc td, #ogdzzfqscc th {
   border-style: none;
 }
 
-#iswowyudjc p {
+#ogdzzfqscc p {
   margin: 0;
   padding: 0;
 }
 
-#iswowyudjc .gt_table {
+#ogdzzfqscc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -319,12 +313,12 @@ caption {
   border-left-color: #D3D3D3;
 }
 
-#iswowyudjc .gt_caption {
+#ogdzzfqscc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#iswowyudjc .gt_title {
+#ogdzzfqscc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -336,7 +330,7 @@ caption {
   border-bottom-width: 0;
 }
 
-#iswowyudjc .gt_subtitle {
+#ogdzzfqscc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -348,7 +342,7 @@ caption {
   border-top-width: 0;
 }
 
-#iswowyudjc .gt_heading {
+#ogdzzfqscc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -360,13 +354,13 @@ caption {
   border-right-color: #D3D3D3;
 }
 
-#iswowyudjc .gt_bottom_border {
+#ogdzzfqscc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#iswowyudjc .gt_col_headings {
+#ogdzzfqscc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -381,7 +375,7 @@ caption {
   border-right-color: #D3D3D3;
 }
 
-#iswowyudjc .gt_col_heading {
+#ogdzzfqscc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -401,7 +395,7 @@ caption {
   overflow-x: hidden;
 }
 
-#iswowyudjc .gt_column_spanner_outer {
+#ogdzzfqscc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -413,15 +407,15 @@ caption {
   padding-right: 4px;
 }
 
-#iswowyudjc .gt_column_spanner_outer:first-child {
+#ogdzzfqscc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#iswowyudjc .gt_column_spanner_outer:last-child {
+#ogdzzfqscc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#iswowyudjc .gt_column_spanner {
+#ogdzzfqscc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -433,11 +427,11 @@ caption {
   width: 100%;
 }
 
-#iswowyudjc .gt_spanner_row {
+#ogdzzfqscc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#iswowyudjc .gt_group_heading {
+#ogdzzfqscc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -463,7 +457,7 @@ caption {
   text-align: left;
 }
 
-#iswowyudjc .gt_empty_group_heading {
+#ogdzzfqscc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -478,15 +472,15 @@ caption {
   vertical-align: middle;
 }
 
-#iswowyudjc .gt_from_md > :first-child {
+#ogdzzfqscc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#iswowyudjc .gt_from_md > :last-child {
+#ogdzzfqscc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#iswowyudjc .gt_row {
+#ogdzzfqscc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -505,7 +499,7 @@ caption {
   overflow-x: hidden;
 }
 
-#iswowyudjc .gt_stub {
+#ogdzzfqscc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -518,7 +512,7 @@ caption {
   padding-right: 5px;
 }
 
-#iswowyudjc .gt_stub_row_group {
+#ogdzzfqscc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -532,15 +526,15 @@ caption {
   vertical-align: top;
 }
 
-#iswowyudjc .gt_row_group_first td {
+#ogdzzfqscc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#iswowyudjc .gt_row_group_first th {
+#ogdzzfqscc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#iswowyudjc .gt_summary_row {
+#ogdzzfqscc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -550,16 +544,16 @@ caption {
   padding-right: 5px;
 }
 
-#iswowyudjc .gt_first_summary_row {
+#ogdzzfqscc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#iswowyudjc .gt_first_summary_row.thick {
+#ogdzzfqscc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#iswowyudjc .gt_last_summary_row {
+#ogdzzfqscc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -569,7 +563,7 @@ caption {
   border-bottom-color: #D3D3D3;
 }
 
-#iswowyudjc .gt_grand_summary_row {
+#ogdzzfqscc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -579,7 +573,7 @@ caption {
   padding-right: 5px;
 }
 
-#iswowyudjc .gt_first_grand_summary_row {
+#ogdzzfqscc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -589,7 +583,7 @@ caption {
   border-top-color: #D3D3D3;
 }
 
-#iswowyudjc .gt_last_grand_summary_row_top {
+#ogdzzfqscc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -599,11 +593,11 @@ caption {
   border-bottom-color: #D3D3D3;
 }
 
-#iswowyudjc .gt_striped {
+#ogdzzfqscc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#iswowyudjc .gt_table_body {
+#ogdzzfqscc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -612,7 +606,7 @@ caption {
   border-bottom-color: #D3D3D3;
 }
 
-#iswowyudjc .gt_footnotes {
+#ogdzzfqscc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -626,7 +620,7 @@ caption {
   border-right-color: #D3D3D3;
 }
 
-#iswowyudjc .gt_footnote {
+#ogdzzfqscc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -635,7 +629,7 @@ caption {
   padding-right: 5px;
 }
 
-#iswowyudjc .gt_sourcenotes {
+#ogdzzfqscc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -649,7 +643,7 @@ caption {
   border-right-color: #D3D3D3;
 }
 
-#iswowyudjc .gt_sourcenote {
+#ogdzzfqscc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -657,63 +651,63 @@ caption {
   padding-right: 5px;
 }
 
-#iswowyudjc .gt_left {
+#ogdzzfqscc .gt_left {
   text-align: left;
 }
 
-#iswowyudjc .gt_center {
+#ogdzzfqscc .gt_center {
   text-align: center;
 }
 
-#iswowyudjc .gt_right {
+#ogdzzfqscc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#iswowyudjc .gt_font_normal {
+#ogdzzfqscc .gt_font_normal {
   font-weight: normal;
 }
 
-#iswowyudjc .gt_font_bold {
+#ogdzzfqscc .gt_font_bold {
   font-weight: bold;
 }
 
-#iswowyudjc .gt_font_italic {
+#ogdzzfqscc .gt_font_italic {
   font-style: italic;
 }
 
-#iswowyudjc .gt_super {
+#ogdzzfqscc .gt_super {
   font-size: 65%;
 }
 
-#iswowyudjc .gt_footnote_marks {
+#ogdzzfqscc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#iswowyudjc .gt_asterisk {
+#ogdzzfqscc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#iswowyudjc .gt_indent_1 {
+#ogdzzfqscc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#iswowyudjc .gt_indent_2 {
+#ogdzzfqscc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#iswowyudjc .gt_indent_3 {
+#ogdzzfqscc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#iswowyudjc .gt_indent_4 {
+#ogdzzfqscc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#iswowyudjc .gt_indent_5 {
+#ogdzzfqscc .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -875,49 +869,41 @@ z_{\beta} = 0.84
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>groupdata <span class="ot">&lt;-</span> cleandata <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>,<span class="dv">9</span>)) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>()</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Custom rendering functions with bold variable names</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>mean_sd_ci <span class="ot">&lt;-</span> <span class="cf">function</span>(x, ...) {</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  mean_val <span class="ot">&lt;-</span> <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  sd_val <span class="ot">&lt;-</span> <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(x))</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  error <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> sd_val <span class="sc">/</span> <span class="fu">sqrt</span>(n)  <span class="co"># 95% confidence interval</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  lower_ci <span class="ot">&lt;-</span> mean_val <span class="sc">-</span> error</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  upper_ci <span class="ot">&lt;-</span> mean_val <span class="sc">+</span> error</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sprintf</span>(<span class="st">"&lt;b&gt;%0.1f&lt;/b&gt; (%0.1f) [%0.1f, %0.1f]"</span>, mean_val, sd_val, lower_ci, upper_ci)</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>prop_freq_ci <span class="ot">&lt;-</span> <span class="cf">function</span>(x, ...) {</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  tbl <span class="ot">&lt;-</span> <span class="fu">table</span>(x, <span class="at">useNA =</span> <span class="st">"no"</span>)</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">sum</span>(tbl)</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  prop <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(tbl)</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  ci_lower <span class="ot">&lt;-</span> prop <span class="sc">-</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span> <span class="fu">sqrt</span>(prop <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> prop) <span class="sc">/</span> n)</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  ci_upper <span class="ot">&lt;-</span> prop <span class="sc">+</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span> <span class="fu">sqrt</span>(prop <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> prop) <span class="sc">/</span> n)</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Ensure confidence intervals are within bounds</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  ci_lower <span class="ot">&lt;-</span> <span class="fu">pmax</span>(<span class="dv">0</span>, ci_lower)</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  ci_upper <span class="ot">&lt;-</span> <span class="fu">pmin</span>(<span class="dv">1</span>, ci_upper)</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create a separate column for levels and their percentages</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  levels <span class="ot">&lt;-</span> <span class="fu">names</span>(tbl)</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  values <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">"&lt;b&gt;%d&lt;/b&gt; (%.1f%%) [%.1f%%, %.1f%%]"</span>, tbl, prop <span class="sc">*</span> <span class="dv">100</span>, ci_lower <span class="sc">*</span> <span class="dv">100</span>, ci_upper <span class="sc">*</span> <span class="dv">100</span>)</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create a two-column HTML table for each variable</span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&lt;table&gt;"</span>,</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(<span class="st">"&lt;tr&gt;&lt;td style='text-align:left'&gt;&lt;b&gt;"</span>, levels, <span class="st">"&lt;/b&gt;&lt;/td&gt;"</span>,</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>           <span class="st">"&lt;td style='text-align:right'&gt;"</span>, values, <span class="st">"&lt;/td&gt;&lt;/tr&gt;"</span>, <span class="at">collapse =</span> <span class="st">""</span>),</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&lt;/table&gt;"</span></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the table using table1</span></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="fu">table1</span>(<span class="sc">~</span> Edad <span class="sc">+</span> Sexo <span class="sc">+</span> <span class="st">`</span><span class="at">Enfermedad sistémica</span><span class="st">`</span> <span class="sc">+</span> Fumador <span class="sc">+</span> <span class="st">`</span><span class="at">Año de atención de la especialidad de IBM</span><span class="st">`</span> <span class="sc">|</span> <span class="st">`</span><span class="at">Tipo de cirugía</span><span class="st">`</span>, </span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> groupdata, </span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>       <span class="at">overall =</span> <span class="st">"Total"</span>,</span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>       <span class="at">render.continuous =</span> mean_sd_ci,</span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>       <span class="at">render.categorical =</span> prop_freq_ci,</span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Tabla 2: Características clínicas y sociodemográficas de los pacientes según tipo de cirugía"</span>,</span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>       <span class="at">footnote =</span> <span class="st">"Nota: Variables numéricas: Media (Desviación Estandar) [Intervalo de confianza 95%], Variables categóricas: Fecuencia absoluta (Porcentaje) [Intervalo de confianza 95%]"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>mean_sd_ci <span class="ot">&lt;-</span> <span class="cf">function</span>(x, ...) {</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  mean_val <span class="ot">&lt;-</span> <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  sd_val <span class="ot">&lt;-</span> <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(x))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  error <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> sd_val <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  lower_ci <span class="ot">&lt;-</span> mean_val <span class="sc">-</span> error</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  upper_ci <span class="ot">&lt;-</span> mean_val <span class="sc">+</span> error</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sprintf</span>(<span class="st">"&lt;b&gt;%0.1f&lt;/b&gt; (%0.1f) [%0.1f, %0.1f]"</span>, mean_val, sd_val, lower_ci, upper_ci)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>prop_freq_ci <span class="ot">&lt;-</span> <span class="cf">function</span>(x, ...) {</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  tbl <span class="ot">&lt;-</span> <span class="fu">table</span>(x, <span class="at">useNA =</span> <span class="st">"no"</span>)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">sum</span>(tbl)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  prop <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(tbl)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  ci_lower <span class="ot">&lt;-</span> prop <span class="sc">-</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span> <span class="fu">sqrt</span>(prop <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> prop) <span class="sc">/</span> n)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  ci_upper <span class="ot">&lt;-</span> prop <span class="sc">+</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span> <span class="fu">sqrt</span>(prop <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> prop) <span class="sc">/</span> n)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  ci_lower <span class="ot">&lt;-</span> <span class="fu">pmax</span>(<span class="dv">0</span>, ci_lower)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  ci_upper <span class="ot">&lt;-</span> <span class="fu">pmin</span>(<span class="dv">1</span>, ci_upper)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  levels <span class="ot">&lt;-</span> <span class="fu">names</span>(tbl)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  values <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">"&lt;b&gt;%d&lt;/b&gt; (%.1f%%) [%.1f%%, %.1f%%]"</span>, tbl, prop <span class="sc">*</span> <span class="dv">100</span>, ci_lower <span class="sc">*</span> <span class="dv">100</span>, ci_upper <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&lt;table&gt;"</span>,</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(<span class="st">"&lt;tr&gt;&lt;td style='text-align:left'&gt;&lt;b&gt;"</span>, levels, <span class="st">"&lt;/b&gt;&lt;/td&gt;"</span>,</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>           <span class="st">"&lt;td style='text-align:right'&gt;"</span>, values, <span class="st">"&lt;/td&gt;&lt;/tr&gt;"</span>, <span class="at">collapse =</span> <span class="st">""</span>),</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&lt;/table&gt;"</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="fu">table1</span>(<span class="sc">~</span> Edad <span class="sc">+</span> Sexo <span class="sc">+</span> <span class="st">`</span><span class="at">Enfermedad sistémica</span><span class="st">`</span> <span class="sc">+</span> Fumador <span class="sc">+</span> <span class="st">`</span><span class="at">Año de atención de la especialidad de IBM</span><span class="st">`</span> <span class="sc">|</span> <span class="st">`</span><span class="at">Tipo de cirugía</span><span class="st">`</span>, </span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> groupdata, </span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>       <span class="at">overall =</span> <span class="st">"Total"</span>,</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>       <span class="at">render.continuous =</span> mean_sd_ci,</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">render.categorical =</span> prop_freq_ci,</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Tabla 2: Características clínicas y sociodemográficas de los pacientes según tipo de cirugía"</span>,</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>       <span class="at">footnote =</span> <span class="st">"Nota: Variables numéricas: Media (Desviación Estandar) [Intervalo de confianza 95%], Variables categóricas: Fecuencia absoluta (Porcentaje) [Intervalo de confianza 95%]"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="Rtable1">

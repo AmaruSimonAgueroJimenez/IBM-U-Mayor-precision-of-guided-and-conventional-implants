@@ -27,14 +27,10 @@ caption {
 # Librerias de R y administracion de datos.
 
 ```{r message=FALSE, warning=FALSE}
-# Load necessary packages
 install_and_load_packages <- function(packages) {
   for (package in packages) {
-    # Comprueba si el paquete está instalado
     if (!require(package, character.only = TRUE)) {
-      # Instala el paquete si no está instalado
       install.packages(package)
-      # Carga el paquete después de instalarlo
       library(package, character.only = TRUE)
     }
   }
@@ -66,7 +62,7 @@ summarize_columns <- function(df) {
     "Tipo de Variable (Informática)" = character(),
     "Datos perdidos" = integer(),
     stringsAsFactors = FALSE,
-    check.names = FALSE  # Para evitar la sustitución automática de caracteres en los nombres
+    check.names = FALSE
   )
 
   for (col_name in col_names) {
@@ -84,11 +80,9 @@ summarize_columns <- function(df) {
       "Tipo de Variable (Informática)" = column_class,
       "Datos perdidos" = NA_count,
       stringsAsFactors = FALSE,
-      check.names = FALSE  # Para evitar la sustitución automática de caracteres en los nombres
+      check.names = FALSE
     ))
   }
-  
-  # Reemplazar puntos por espacios en los nombres de las columnas
   names(summary_df) <- gsub("\\.", " ", names(summary_df))
   
   return(summary_df)
@@ -180,12 +174,11 @@ Todos los datos se analizaron mediante pruebas de dos colas con un nivel de sign
 ```{r}
 groupdata <- cleandata %>% dplyr::select(c(1:7,9)) %>% distinct()
 
-# Custom rendering functions with bold variable names
 mean_sd_ci <- function(x, ...) {
   mean_val <- mean(x, na.rm = TRUE)
   sd_val <- sd(x, na.rm = TRUE)
   n <- sum(!is.na(x))
-  error <- qt(0.975, df = n - 1) * sd_val / sqrt(n)  # 95% confidence interval
+  error <- qt(0.975, df = n - 1) * sd_val / sqrt(n)
   lower_ci <- mean_val - error
   upper_ci <- mean_val + error
   sprintf("<b>%0.1f</b> (%0.1f) [%0.1f, %0.1f]", mean_val, sd_val, lower_ci, upper_ci)
@@ -197,16 +190,10 @@ prop_freq_ci <- function(x, ...) {
   prop <- prop.table(tbl)
   ci_lower <- prop - qnorm(0.975) * sqrt(prop * (1 - prop) / n)
   ci_upper <- prop + qnorm(0.975) * sqrt(prop * (1 - prop) / n)
-  
-  # Ensure confidence intervals are within bounds
   ci_lower <- pmax(0, ci_lower)
   ci_upper <- pmin(1, ci_upper)
-  
-  # Create a separate column for levels and their percentages
   levels <- names(tbl)
   values <- sprintf("<b>%d</b> (%.1f%%) [%.1f%%, %.1f%%]", tbl, prop * 100, ci_lower * 100, ci_upper * 100)
-  
-  # Create a two-column HTML table for each variable
   paste0(
     "<table>",
     paste0("<tr><td style='text-align:left'><b>", levels, "</b></td>",
@@ -215,7 +202,6 @@ prop_freq_ci <- function(x, ...) {
   )
 }
 
-# Create the table using table1
 table1(~ Edad + Sexo + `Enfermedad sistémica` + Fumador + `Año de atención de la especialidad de IBM` | `Tipo de cirugía`, 
        data = groupdata, 
        overall = "Total",
