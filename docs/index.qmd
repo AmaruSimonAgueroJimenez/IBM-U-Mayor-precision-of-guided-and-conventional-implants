@@ -1,0 +1,224 @@
+---
+title: "COMPARACIÓN DE LA PRECISIÓN EN LA INSTALACIÓN DE IMPLANTES ENTRE CIRUGÍA CONVENCIONAL Y CIRUGÍA GUIADA ESTÁTICA EN UN CONTEXTO UNIVERSITARIO: ESTUDIO DE COHORTE RETROSPECTIVO"
+author:
+  - name: "Sebastián Leandro Melys Merino"
+    email: "smelys@uc.cl"
+  - name: "Noelle Andrea D’amico Roman"
+    email: "nadamico@miuandes.cl"
+  - name: "Amaru Simón Agüero Jiménez"
+    email: "amaru.aguero@umayor.cl"
+    orcid: "0000-0001-7336-1833"
+
+format:
+  html:
+    lang: es
+    toc: true
+    number-sections: true
+    code-fold: true
+---
+
+```{css, echo=FALSE}
+caption {
+  caption-side: top;
+  text-align: center;
+}
+```
+
+# Librerias de R y administracion de datos.
+
+```{r message=FALSE, warning=FALSE}
+# Load necessary packages
+install_and_load_packages <- function(packages) {
+  for (package in packages) {
+    # Comprueba si el paquete está instalado
+    if (!require(package, character.only = TRUE)) {
+      # Instala el paquete si no está instalado
+      install.packages(package)
+      # Carga el paquete después de instalarlo
+      library(package, character.only = TRUE)
+    }
+  }
+}
+
+necessary_packages <- c("haven", "knitr", "readxl", "tidyverse","Hmisc", "data.table", "survey", "scales","gt","FactoMineR","factoextra","vcd","reshape2","corrplot","klaR", "stringr","table1")
+
+install_and_load_packages(necessary_packages)
+
+opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE
+)
+
+```
+
+```{r}
+data <- read_excel(paste0(gsub("/docs", "", getwd()), "/data/data.xlsx"))
+cleandata <-  data %>%
+  mutate(across(where(is.character), as.factor)) %>% 
+  mutate(`Longitud del implante` = fct_relevel(`Longitud del implante`, 
+                                           "7 mm.", "8,5 mm.", "10 mm.", "11,5 mm.", "13 mm."))
+
+summarize_columns <- function(df) {
+  col_names <- names(df)
+  summary_df <- data.frame(
+    Variable = character(),
+    "Tipo de Variable (Informática)" = character(),
+    "Datos perdidos" = integer(),
+    stringsAsFactors = FALSE,
+    check.names = FALSE  # Para evitar la sustitución automática de caracteres en los nombres
+  )
+
+  for (col_name in col_names) {
+    column <- col_name
+    if (is.factor(df[[col_name]])) {
+      niveles <- paste(levels(df[[col_name]]), collapse = ", ")
+      column_class <- paste("Factor (", niveles, ")", sep = "")
+    } else {
+      column_class <- paste0(toupper(substring(class(df[[col_name]])[1], 1, 1)),
+                             substring(class(df[[col_name]])[1], 2))
+    }
+    NA_count <- sum(is.na(df[[col_name]]))
+    summary_df <- rbind(summary_df, data.frame(
+      Variable = column,
+      "Tipo de Variable (Informática)" = column_class,
+      "Datos perdidos" = NA_count,
+      stringsAsFactors = FALSE,
+      check.names = FALSE  # Para evitar la sustitución automática de caracteres en los nombres
+    ))
+  }
+  
+  # Reemplazar puntos por espacios en los nombres de las columnas
+  names(summary_df) <- gsub("\\.", " ", names(summary_df))
+  
+  return(summary_df)
+}
+
+
+```
+
+# Introducción.
+
+Se desarrolló un estudio de cohorte retrospectivo, donde se analizó la presición de instalación de implantes en pacientes operados en el Postgrado de Implantología Bucomaxilofacial (BMF) de la Universidad Mayor de Santiago, Chile, entre diciembre de 2022 y marzo 2024 en el marco de su control de mantención implantológico. Los pacientes que finalizaron su tratamiento en el posgrado de implantología son llamados a un control implantológico rutinario que es costeado por el mismo. Durante el control se evaluó clínicamente la integridad de la corona, los contactos oclusales que presenta, el implante y los tejidos blandos que lo rodean. Para esto se retiró la corona del implante y realizó un destartraje en caso de presentarse cálculo en relación a los tejidos periimplantarios. Finalmente se instaló nuevamente la corona, se refuerzan las indicaciones de cuidado al paciente además de resolver sus dudas y se cita para otro control.
+
+# Metodología.
+
+## Variables dependientes.
+
+Las variables asociadas a precision fueron las siguientes:
+
+1.  Desviación angular (medida en grados): una angulación entre los ejes longitudinales de los implantes instalados planificados y reales.
+
+2.  Desviación coronal (medida en mm.): una desviación lineal entre el punto de entrada (es decir, el centro de la plataforma) de los implantes instalados planificados y reales.
+
+3.  Desviación apical (medida en mm.): una desviación lineal entre el punto del vértice de los implantes instalados planificados y reales.
+
+4.  Desviación de profundidad (medida en mm.): una desviación lineal medida en la dirección vertical entre el centro de la plataforma de los implantes instalados planeados y reales.
+
+## Variables Independientes.
+
+1.  Tipo de Cirugía.
+
+2.  Ubicación del Implante.
+
+3.  Sector del Implante.
+
+4.  Zona del Implante.
+
+5.  Diámetro del Implante.
+
+6.  Longitud del Implante.
+
+7.  Variables clinicas-sociodemograficas.
+
+Las variables y su formato informático están descrita en la tabla 1:
+
+```{r tabla 1}
+
+summary_table <- summarize_columns(cleandata)
+gt(summary_table)  %>% 
+  tab_caption(caption = "Tabla 1: Resumen de las variables y tipo informático.")
+
+```
+
+## Diseño muestral.
+
+Se ocupó un diseño muestral para la comparabilidad de pares de medias. El cálculo muestral se realizó en base a la variable dependiente con mayor varianza según estudios previos y la variable independiente principal de tipo dicotómica: Tipo de instalación de implante. Este cálculo del tamaño fue para cada submuestrade manera balanceada ($n_{guiada}$ y $n_{convencional}$), asumiendo normalidad de la variable dependiente (Desviasiones), tal que:
+
+$$
+n_{guiada} = n_{convencional} = \frac{2\left(z_{\frac{\alpha}{2}} + z_{\beta}\right)^2 \sigma^2}{\epsilon^2}
+$$
+
+En donde se ocupó:
+
+-   Una significancia estadística $(\alpha = 0.05)$ tal que, $$
+    z_{\frac{\alpha}{2}} = 1.96
+    $$
+
+-   Una potencia estadística $(1 - \beta = 0.8)$ tal que, $$
+    z_{\beta} = 0.84
+    $$
+
+La varianza poblacional $\sigma^2$ se reemplazó por la mayor varianza muestral $s^2$ observada (asumiendo homocedasticidad entre submuestras) en estudios anteriores.
+
+De acuerdo a lo anterior se determina que el tamaño muestral es de 13 implantes para cada grupo.
+
+## Análisis estadístico.
+
+Para las variables numéricas (desviaciones), se evaluó normalidad con el test Shapiro-Wilk, se calcularon la media con sus respectivos intervalos de confianza, la desviación estándar, los valores mínimos, los cuartiles (Q1, mediana, Q3) y los valores máximos. Para las variables categóricas, se calcularon las frecuencias absolutas y relativas para cada nivel de la variable.
+
+Se utilizó la prueba de Kruskal-Wallis para evaluar las diferencias entre las variables dependientes y las variables independientes categóricas. Esta prueba no paramétrica es adecuada para comparar tres o más grupos independientes y no asume una distribución normal de los datos.
+
+Se realizaron comparaciones post hoc utilizando la prueba de Dunn para identificar diferencias significativas entre pares de grupos específicos dentro de cada variable independiente. Esta prueba se utilizó debido a su capacidad para comparar dos grupos independientes y su aplicabilidad a datos no paramétricos.
+
+Todos los datos se analizaron mediante pruebas de dos colas con un nivel de significancia de $\alpha=0,05$ y se estimaron intervalos de confianza (IC) con un nivel de confianza de $1-\alpha=0,95$. El análisis estadístico se realizó utilizando el software estadístico R (Versión 4.4) y Rstudio (Versión 2023.03.0+386).
+
+# Resultados.
+
+## Análisis descriptivo
+
+```{r}
+# Custom rendering functions with bold variable names
+mean_sd_ci <- function(x, ...) {
+  mean_val <- mean(x, na.rm = TRUE)
+  sd_val <- sd(x, na.rm = TRUE)
+  n <- sum(!is.na(x))
+  error <- qt(0.975, df = n - 1) * sd_val / sqrt(n)  # 95% confidence interval
+  lower_ci <- mean_val - error
+  upper_ci <- mean_val + error
+  sprintf("<b>%0.1f</b> (%0.1f) [%0.1f, %0.1f]", mean_val, sd_val, lower_ci, upper_ci)
+}
+
+prop_freq_ci <- function(x, ...) {
+  tbl <- table(x, useNA = "no")
+  n <- sum(tbl)
+  prop <- prop.table(tbl)
+  ci_lower <- prop - qnorm(0.975) * sqrt(prop * (1 - prop) / n)
+  ci_upper <- prop + qnorm(0.975) * sqrt(prop * (1 - prop) / n)
+  
+  # Ensure confidence intervals are within bounds
+  ci_lower <- pmax(0, ci_lower)
+  ci_upper <- pmin(1, ci_upper)
+  
+  # Create a separate column for levels and their percentages
+  levels <- names(tbl)
+  values <- sprintf("<b>%d</b> (%.1f%%) [%.1f%%, %.1f%%]", tbl, prop * 100, ci_lower * 100, ci_upper * 100)
+  
+  # Create a two-column HTML table for each variable
+  paste0(
+    "<table>",
+    paste0("<tr><td style='text-align:left'><b>", levels, "</b></td>",
+           "<td style='text-align:right'>", values, "</td></tr>", collapse = ""),
+    "</table>"
+  )
+}
+
+# Create the table using table1
+table1(~ Edad + Sexo + `Enfermedad sistémica` + Fumador + `Año del estudiante de IBM` | `Tipo de cirugía`, 
+       data = cleandata, 
+       overall = "Total",
+       render.continuous = mean_sd_ci,
+       render.categorical = prop_freq_ci,
+       caption = "Tabla 2: Características clínicas y sociodemográficas de los pacientes según tipo de cirugía",
+       footnote = "Nota: Variables numéricas: Media (Desviación Estandar) [Intervalo de confianza 95%], Variables categóricas: Fecuencia absoluta (Porcentaje) [Intervalo de confianza 95%]")
+```
