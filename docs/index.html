@@ -124,7 +124,8 @@ window.Quarto = {
   </ul></li>
   <li><a href="#resultados." id="toc-resultados." class="nav-link" data-scroll-target="#resultados."><span class="header-section-number">4</span> Resultados.</a>
   <ul class="collapse">
-  <li><a href="#análisis-descriptivo" id="toc-análisis-descriptivo" class="nav-link" data-scroll-target="#análisis-descriptivo"><span class="header-section-number">4.1</span> Análisis descriptivo</a></li>
+  <li><a href="#análisis-estadístico-descriptivo." id="toc-análisis-estadístico-descriptivo." class="nav-link" data-scroll-target="#análisis-estadístico-descriptivo."><span class="header-section-number">4.1</span> Análisis estadístico descriptivo.</a></li>
+  <li><a href="#análisis-estadístico-bivariado." id="toc-análisis-estadístico-bivariado." class="nav-link" data-scroll-target="#análisis-estadístico-bivariado."><span class="header-section-number">4.2</span> Análisis estadístico bivariado.</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -180,7 +181,7 @@ caption {
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>necessary_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"haven"</span>, <span class="st">"knitr"</span>, <span class="st">"readxl"</span>, <span class="st">"tidyverse"</span>,<span class="st">"Hmisc"</span>, <span class="st">"data.table"</span>, <span class="st">"survey"</span>, <span class="st">"scales"</span>,<span class="st">"gt"</span>,<span class="st">"FactoMineR"</span>,<span class="st">"factoextra"</span>,<span class="st">"vcd"</span>,<span class="st">"reshape2"</span>,<span class="st">"corrplot"</span>,<span class="st">"klaR"</span>, <span class="st">"stringr"</span>,<span class="st">"table1"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>necessary_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"haven"</span>, <span class="st">"knitr"</span>, <span class="st">"readxl"</span>, <span class="st">"tidyverse"</span>,<span class="st">"Hmisc"</span>, <span class="st">"data.table"</span>, <span class="st">"survey"</span>, <span class="st">"scales"</span>,<span class="st">"gt"</span>,<span class="st">"FactoMineR"</span>,<span class="st">"factoextra"</span>,<span class="st">"vcd"</span>,<span class="st">"reshape2"</span>,<span class="st">"corrplot"</span>,<span class="st">"klaR"</span>, <span class="st">"stringr"</span>,<span class="st">"table1"</span>,<span class="st">"ggpubr"</span>,<span class="st">"rcompanion"</span>, <span class="st">"dunn.test"</span>)</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">install_and_load_packages</span>(necessary_packages)</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
@@ -271,23 +272,23 @@ caption {
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_caption</span>(<span class="at">caption =</span> <span class="st">"Tabla 1: Resumen de las variables y tipo informático."</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="kwaylbybfs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kwaylbybfs table {
+<div id="wsuoksvrof" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wsuoksvrof table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kwaylbybfs thead, #kwaylbybfs tbody, #kwaylbybfs tfoot, #kwaylbybfs tr, #kwaylbybfs td, #kwaylbybfs th {
+#wsuoksvrof thead, #wsuoksvrof tbody, #wsuoksvrof tfoot, #wsuoksvrof tr, #wsuoksvrof td, #wsuoksvrof th {
   border-style: none;
 }
 
-#kwaylbybfs p {
+#wsuoksvrof p {
   margin: 0;
   padding: 0;
 }
 
-#kwaylbybfs .gt_table {
+#wsuoksvrof .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -313,12 +314,12 @@ caption {
   border-left-color: #D3D3D3;
 }
 
-#kwaylbybfs .gt_caption {
+#wsuoksvrof .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kwaylbybfs .gt_title {
+#wsuoksvrof .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -330,7 +331,7 @@ caption {
   border-bottom-width: 0;
 }
 
-#kwaylbybfs .gt_subtitle {
+#wsuoksvrof .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -342,7 +343,7 @@ caption {
   border-top-width: 0;
 }
 
-#kwaylbybfs .gt_heading {
+#wsuoksvrof .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -354,13 +355,13 @@ caption {
   border-right-color: #D3D3D3;
 }
 
-#kwaylbybfs .gt_bottom_border {
+#wsuoksvrof .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kwaylbybfs .gt_col_headings {
+#wsuoksvrof .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -375,7 +376,7 @@ caption {
   border-right-color: #D3D3D3;
 }
 
-#kwaylbybfs .gt_col_heading {
+#wsuoksvrof .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -395,7 +396,7 @@ caption {
   overflow-x: hidden;
 }
 
-#kwaylbybfs .gt_column_spanner_outer {
+#wsuoksvrof .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -407,15 +408,15 @@ caption {
   padding-right: 4px;
 }
 
-#kwaylbybfs .gt_column_spanner_outer:first-child {
+#wsuoksvrof .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kwaylbybfs .gt_column_spanner_outer:last-child {
+#wsuoksvrof .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kwaylbybfs .gt_column_spanner {
+#wsuoksvrof .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -427,11 +428,11 @@ caption {
   width: 100%;
 }
 
-#kwaylbybfs .gt_spanner_row {
+#wsuoksvrof .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kwaylbybfs .gt_group_heading {
+#wsuoksvrof .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -457,7 +458,7 @@ caption {
   text-align: left;
 }
 
-#kwaylbybfs .gt_empty_group_heading {
+#wsuoksvrof .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -472,15 +473,15 @@ caption {
   vertical-align: middle;
 }
 
-#kwaylbybfs .gt_from_md > :first-child {
+#wsuoksvrof .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kwaylbybfs .gt_from_md > :last-child {
+#wsuoksvrof .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kwaylbybfs .gt_row {
+#wsuoksvrof .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -499,7 +500,7 @@ caption {
   overflow-x: hidden;
 }
 
-#kwaylbybfs .gt_stub {
+#wsuoksvrof .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -512,7 +513,7 @@ caption {
   padding-right: 5px;
 }
 
-#kwaylbybfs .gt_stub_row_group {
+#wsuoksvrof .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -526,15 +527,15 @@ caption {
   vertical-align: top;
 }
 
-#kwaylbybfs .gt_row_group_first td {
+#wsuoksvrof .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kwaylbybfs .gt_row_group_first th {
+#wsuoksvrof .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kwaylbybfs .gt_summary_row {
+#wsuoksvrof .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -544,16 +545,16 @@ caption {
   padding-right: 5px;
 }
 
-#kwaylbybfs .gt_first_summary_row {
+#wsuoksvrof .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kwaylbybfs .gt_first_summary_row.thick {
+#wsuoksvrof .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kwaylbybfs .gt_last_summary_row {
+#wsuoksvrof .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -563,7 +564,7 @@ caption {
   border-bottom-color: #D3D3D3;
 }
 
-#kwaylbybfs .gt_grand_summary_row {
+#wsuoksvrof .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -573,7 +574,7 @@ caption {
   padding-right: 5px;
 }
 
-#kwaylbybfs .gt_first_grand_summary_row {
+#wsuoksvrof .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -583,7 +584,7 @@ caption {
   border-top-color: #D3D3D3;
 }
 
-#kwaylbybfs .gt_last_grand_summary_row_top {
+#wsuoksvrof .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -593,11 +594,11 @@ caption {
   border-bottom-color: #D3D3D3;
 }
 
-#kwaylbybfs .gt_striped {
+#wsuoksvrof .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kwaylbybfs .gt_table_body {
+#wsuoksvrof .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -606,7 +607,7 @@ caption {
   border-bottom-color: #D3D3D3;
 }
 
-#kwaylbybfs .gt_footnotes {
+#wsuoksvrof .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -620,7 +621,7 @@ caption {
   border-right-color: #D3D3D3;
 }
 
-#kwaylbybfs .gt_footnote {
+#wsuoksvrof .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -629,7 +630,7 @@ caption {
   padding-right: 5px;
 }
 
-#kwaylbybfs .gt_sourcenotes {
+#wsuoksvrof .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -643,7 +644,7 @@ caption {
   border-right-color: #D3D3D3;
 }
 
-#kwaylbybfs .gt_sourcenote {
+#wsuoksvrof .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -651,63 +652,63 @@ caption {
   padding-right: 5px;
 }
 
-#kwaylbybfs .gt_left {
+#wsuoksvrof .gt_left {
   text-align: left;
 }
 
-#kwaylbybfs .gt_center {
+#wsuoksvrof .gt_center {
   text-align: center;
 }
 
-#kwaylbybfs .gt_right {
+#wsuoksvrof .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kwaylbybfs .gt_font_normal {
+#wsuoksvrof .gt_font_normal {
   font-weight: normal;
 }
 
-#kwaylbybfs .gt_font_bold {
+#wsuoksvrof .gt_font_bold {
   font-weight: bold;
 }
 
-#kwaylbybfs .gt_font_italic {
+#wsuoksvrof .gt_font_italic {
   font-style: italic;
 }
 
-#kwaylbybfs .gt_super {
+#wsuoksvrof .gt_super {
   font-size: 65%;
 }
 
-#kwaylbybfs .gt_footnote_marks {
+#wsuoksvrof .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kwaylbybfs .gt_asterisk {
+#wsuoksvrof .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kwaylbybfs .gt_indent_1 {
+#wsuoksvrof .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kwaylbybfs .gt_indent_2 {
+#wsuoksvrof .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kwaylbybfs .gt_indent_3 {
+#wsuoksvrof .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kwaylbybfs .gt_indent_4 {
+#wsuoksvrof .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kwaylbybfs .gt_indent_5 {
+#wsuoksvrof .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -855,15 +856,16 @@ z_{\beta} = 0.84
 <section id="análisis-estadístico." class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="análisis-estadístico."><span class="header-section-number">3.4</span> Análisis estadístico.</h2>
 <p>Para las variables numéricas (desviaciones), se evaluó normalidad con el test Shapiro-Wilk, se calcularon la media con sus respectivos intervalos de confianza, la desviación estándar, los valores mínimos, los cuartiles (Q1, mediana, Q3) y los valores máximos. Para las variables categóricas, se calcularon las frecuencias absolutas y relativas para cada nivel de la variable.</p>
-<p>Se utilizó la prueba de Kruskal-Wallis para evaluar las diferencias entre las variables dependientes y las variables independientes categóricas. Esta prueba no paramétrica es adecuada para comparar tres o más grupos independientes y no asume una distribución normal de los datos.</p>
-<p>Se realizaron comparaciones post hoc utilizando la prueba de Dunn para identificar diferencias significativas entre pares de grupos específicos dentro de cada variable independiente. Esta prueba se utilizó debido a su capacidad para comparar dos grupos independientes y su aplicabilidad a datos no paramétricos.</p>
+<p>Para comparar las diferencias de medias de las desviasionbes, entre tipo de cirugía convenciona y guiada, se utilizó la prueba de Mann-Whitney U, una prueba estadística no paramétrica.</p>
+<p>Se utilizó la prueba Scheirer-Ray-Hare (extensión de la prueba de Kruskal-Wallis para dos factores) para evaluar las diferencias entre las variables dependientes y tipo de cirugía y otras variables independientes categóricas. Esta prueba no paramétrica es adecuada para comparar 1 o más grupos independientes y no asume una distribución normal de los datos.</p>
+<p>Se realizaron comparaciones post hoc utilizando la prueba de Dunn para identificar diferencias significativas entre pares de grupos específicos dentro de cada variable independiente según tipo de cirgugía. Esta prueba se utilizó debido a su capacidad para comparar dos grupos independientes y su aplicabilidad a datos no paramétricos.</p>
 <p>Todos los datos se analizaron mediante pruebas de dos colas con un nivel de significancia de <span class="math inline">\(\alpha=0,05\)</span> y se estimaron intervalos de confianza (IC) con un nivel de confianza de <span class="math inline">\(1-\alpha=0,95\)</span>. El análisis estadístico se realizó utilizando el software estadístico R (Versión 4.4) y Rstudio (Versión 2023.03.0+386).</p>
 </section>
 </section>
 <section id="resultados." class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Resultados.</h1>
-<section id="análisis-descriptivo" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="análisis-descriptivo"><span class="header-section-number">4.1</span> Análisis descriptivo</h2>
+<section id="análisis-estadístico-descriptivo." class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="análisis-estadístico-descriptivo."><span class="header-section-number">4.1</span> Análisis estadístico descriptivo.</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Código</summary>
@@ -1158,7 +1160,7 @@ z_{\beta} = 0.84
 </div>
 <details class="code-fold">
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table1</span>(<span class="sc">~</span> <span class="st">`</span><span class="at">Zona del implante</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">Sector del Implante</span><span class="st">`</span>  <span class="sc">+</span> <span class="st">`</span><span class="at">Longitud del implante</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">Diámetro del Implante</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">Desviación angular</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">Desviación  coronal</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">Desviación apical</span><span class="st">`</span> <span class="sc">+</span>  <span class="st">`</span><span class="at">Desviación de profundidad</span><span class="st">`</span> <span class="sc">|</span> <span class="st">`</span><span class="at">Tipo de cirugía</span><span class="st">`</span>, </span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table1</span>(<span class="sc">~</span> <span class="st">`</span><span class="at">Zona del implante</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">Sector del Implante</span><span class="st">`</span>  <span class="sc">+</span> <span class="st">`</span><span class="at">Longitud del implante</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">Diámetro del Implante</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">Desviación angular</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">Desviación coronal</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">Desviación apical</span><span class="st">`</span> <span class="sc">+</span>  <span class="st">`</span><span class="at">Desviación de profundidad</span><span class="st">`</span> <span class="sc">|</span> <span class="st">`</span><span class="at">Tipo de cirugía</span><span class="st">`</span>, </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> cleandata, </span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">overall =</span> <span class="st">"Total"</span>,</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">render.continuous =</span> mean_sd_ci,</span>
@@ -1729,6 +1731,2156 @@ z_{\beta} = 0.84
 <td class="firstrow lastrow">
 <p><strong>0.4</strong> (0.4) [0.3, 0.5]</p>
 </td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>prepare_data <span class="ot">&lt;-</span> <span class="cf">function</span>(data, var) {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  data_by_type <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Tipo de cirugía</span><span class="st">`</span>, {{ var }}) <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">prop =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">ci_lower =</span> <span class="fu">pmax</span>(<span class="dv">0</span>, prop <span class="sc">-</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span> <span class="fu">sqrt</span>(prop <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> prop) <span class="sc">/</span> <span class="fu">sum</span>(n))),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">ci_upper =</span> <span class="fu">pmin</span>(<span class="dv">1</span>, prop <span class="sc">+</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span> <span class="fu">sqrt</span>(prop <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> prop) <span class="sc">/</span> <span class="fu">sum</span>(n))))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  data_total <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>({{ var }}) <span class="sc">%&gt;%</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">prop =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n),</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>           <span class="at">ci_lower =</span> <span class="fu">pmax</span>(<span class="dv">0</span>, prop <span class="sc">-</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span> <span class="fu">sqrt</span>(prop <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> prop) <span class="sc">/</span> <span class="fu">sum</span>(n))),</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>           <span class="at">ci_upper =</span> <span class="fu">pmin</span>(<span class="dv">1</span>, prop <span class="sc">+</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span> <span class="fu">sqrt</span>(prop <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> prop) <span class="sc">/</span> <span class="fu">sum</span>(n))),</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Tipo de cirugía</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Total"</span>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  combined_data <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(data_by_type, data_total)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(combined_data)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>create_plot <span class="ot">&lt;-</span> <span class="cf">function</span>(data, var, title, x_label, <span class="at">show_y_label =</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> {{ var }}, <span class="at">y =</span> prop, <span class="at">fill =</span> <span class="st">`</span><span class="at">Tipo de cirugía</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> ci_lower, <span class="at">ymax =</span> ci_upper), <span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.1f%%"</span>, prop <span class="sc">*</span> <span class="dv">100</span>)), </span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>              <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), </span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>              <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, </span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Convencional"</span> <span class="ot">=</span> <span class="st">"darkviolet"</span>, <span class="st">"Guiada"</span> <span class="ot">=</span> <span class="st">"blue3"</span>, <span class="st">"Total"</span> <span class="ot">=</span> <span class="st">"cyan3"</span>)) <span class="sc">+</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> title,</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="cf">if</span> (show_y_label) <span class="st">"Proporción (IC 95%)"</span> <span class="cf">else</span> <span class="cn">NULL</span>,</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> x_label) <span class="sc">+</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>sector_data <span class="ot">&lt;-</span> <span class="fu">prepare_data</span>(cleandata, <span class="st">`</span><span class="at">Sector del Implante</span><span class="st">`</span>)</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>diametro_data <span class="ot">&lt;-</span> <span class="fu">prepare_data</span>(cleandata, <span class="st">`</span><span class="at">Diámetro del Implante</span><span class="st">`</span>)</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>longitud_data <span class="ot">&lt;-</span> <span class="fu">prepare_data</span>(cleandata, <span class="st">`</span><span class="at">Longitud del implante</span><span class="st">`</span>)</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>plot_sector <span class="ot">&lt;-</span> <span class="fu">create_plot</span>(sector_data, <span class="st">`</span><span class="at">Sector del Implante</span><span class="st">`</span>, <span class="st">"Proporción de Sector del Implante por Tipo de Cirugía"</span>, <span class="st">"Sector del Implante"</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>plot_diametro <span class="ot">&lt;-</span> <span class="fu">create_plot</span>(diametro_data, <span class="st">`</span><span class="at">Diámetro del Implante</span><span class="st">`</span>, <span class="st">"Proporción de Diámetro del Implante por Tipo de Cirugía"</span>, <span class="st">"Diámetro del Implante"</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>plot_longitud <span class="ot">&lt;-</span> <span class="fu">create_plot</span>(longitud_data, <span class="st">`</span><span class="at">Longitud del implante</span><span class="st">`</span>, <span class="st">"Proporción de Longitud del Implante por Tipo de Cirugía"</span>, <span class="st">"Longitud del Implante"</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(plot_sector, plot_diametro, plot_longitud, </span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">nrow =</span> <span class="dv">3</span>, </span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>          <span class="at">common.legend =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="st">"top"</span>,</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>          <span class="at">align =</span> <span class="st">"v"</span>, <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption>Figura 1: Proporciones de variables independietes según tipo de cirugía.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>prepare_data_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(data, var) {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  data_by_type <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Tipo de cirugía</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">mean_val =</span> <span class="fu">mean</span>({{ var }}, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">sd_val =</span> <span class="fu">sd</span>({{ var }}, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">n =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>({{ var }})), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">se =</span> sd_val <span class="sc">/</span> <span class="fu">sqrt</span>(n),</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">ci_lower =</span> mean_val <span class="sc">-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> se,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">ci_upper =</span> mean_val <span class="sc">+</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> se)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  data_total <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">mean_val =</span> <span class="fu">mean</span>({{ var }}, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>              <span class="at">sd_val =</span> <span class="fu">sd</span>({{ var }}, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>              <span class="at">n =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>({{ var }})), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">se =</span> sd_val <span class="sc">/</span> <span class="fu">sqrt</span>(n),</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>           <span class="at">ci_lower =</span> mean_val <span class="sc">-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> se,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>           <span class="at">ci_upper =</span> mean_val <span class="sc">+</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> se,</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Tipo de cirugía</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Total"</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  combined_data <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(data_by_type, data_total)</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(combined_data)</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>create_plot_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(data, var_name, title, y_label, <span class="at">show_y_label =</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Tipo de cirugía</span><span class="st">`</span>, <span class="at">y =</span> mean_val, <span class="at">fill =</span> <span class="st">`</span><span class="at">Tipo de cirugía</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> ci_lower, <span class="at">ymax =</span> ci_upper), <span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.2f"</span>, mean_val)), </span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>              <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), </span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>              <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, </span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Convencional"</span> <span class="ot">=</span> <span class="st">"darkviolet"</span>, <span class="st">"Guiada"</span> <span class="ot">=</span> <span class="st">"blue3"</span>, <span class="st">"Total"</span> <span class="ot">=</span> <span class="st">"cyan3"</span>)) <span class="sc">+</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> title,</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="cf">if</span> (show_y_label) y_label <span class="cf">else</span> <span class="cn">NULL</span>,</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="cn">NULL</span>) <span class="sc">+</span>  <span class="co"># Remove x-axis label</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>angular_data <span class="ot">&lt;-</span> <span class="fu">prepare_data_mean</span>(cleandata, <span class="st">`</span><span class="at">Desviación angular</span><span class="st">`</span>)</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>coronal_data <span class="ot">&lt;-</span> <span class="fu">prepare_data_mean</span>(cleandata, <span class="st">`</span><span class="at">Desviación coronal</span><span class="st">`</span>)</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>apical_data <span class="ot">&lt;-</span> <span class="fu">prepare_data_mean</span>(cleandata, <span class="st">`</span><span class="at">Desviación apical</span><span class="st">`</span>)</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>profundidad_data <span class="ot">&lt;-</span> <span class="fu">prepare_data_mean</span>(cleandata, <span class="st">`</span><span class="at">Desviación de profundidad</span><span class="st">`</span>)</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>plot_angular <span class="ot">&lt;-</span> <span class="fu">create_plot_mean</span>(angular_data, <span class="st">`</span><span class="at">Desviación angular</span><span class="st">`</span>, <span class="st">"Desviación Angular"</span>, <span class="st">"Media (IC 95%)"</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>plot_coronal <span class="ot">&lt;-</span> <span class="fu">create_plot_mean</span>(coronal_data, <span class="st">`</span><span class="at">Desviación coronal</span><span class="st">`</span>, <span class="st">"Desviación Coronal"</span>, <span class="st">"Media (IC 95%)"</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>plot_apical <span class="ot">&lt;-</span> <span class="fu">create_plot_mean</span>(apical_data, <span class="st">`</span><span class="at">Desviación apical</span><span class="st">`</span>, <span class="st">"Desviación Apical"</span>, <span class="st">"Media (IC 95%)"</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>plot_profundidad <span class="ot">&lt;-</span> <span class="fu">create_plot_mean</span>(profundidad_data, <span class="st">`</span><span class="at">Desviación de profundidad</span><span class="st">`</span>, <span class="st">"Desviación de Profundidad"</span>, <span class="st">"Media (IC 95%)"</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(plot_angular, plot_coronal, plot_apical, plot_profundidad,</span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">2</span>, </span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">align =</span> <span class="st">"v"</span>, <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">common.legend =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="st">"top"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption>Figura 2: Medias de desviaciones según tipo de cirugía.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to prepare data for mean and confidence interval by implant diameter</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>prepare_data_diameter <span class="ot">&lt;-</span> <span class="cf">function</span>(data, var) {</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Group and calculate mean and confidence intervals by implant diameter and surgery type</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  data_by_diameter <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Diámetro del Implante</span><span class="st">`</span>, <span class="st">`</span><span class="at">Tipo de cirugía</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">mean_val =</span> <span class="fu">mean</span>({{ var }}, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">sd_val =</span> <span class="fu">sd</span>({{ var }}, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">n =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>({{ var }})), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">se =</span> sd_val <span class="sc">/</span> <span class="fu">sqrt</span>(n),</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">ci_lower =</span> <span class="fu">pmax</span>(<span class="dv">0</span>, mean_val <span class="sc">-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> se), <span class="co"># Ensure lower CI is non-negative</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>           <span class="at">ci_upper =</span> mean_val <span class="sc">+</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> se)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(data_by_diameter)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to create a plot for means by implant diameter</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>create_plot_diameter <span class="ot">&lt;-</span> <span class="cf">function</span>(data, var_name, title, y_label, <span class="at">show_y_label =</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Diámetro del Implante</span><span class="st">`</span>, <span class="at">y =</span> mean_val, <span class="at">fill =</span> <span class="st">`</span><span class="at">Tipo de cirugía</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> ci_lower, <span class="at">ymax =</span> ci_upper), <span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.2f"</span>, mean_val)), </span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>              <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), </span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>              <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, </span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Convencional"</span> <span class="ot">=</span> <span class="st">"darkviolet"</span>, <span class="st">"Guiada"</span> <span class="ot">=</span> <span class="st">"blue3"</span>, <span class="st">"Total"</span> <span class="ot">=</span> <span class="st">"cyan3"</span>)) <span class="sc">+</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> title,</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="cf">if</span> (show_y_label) y_label <span class="cf">else</span> <span class="cn">NULL</span>,</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Diámetro del Implante"</span>) <span class="sc">+</span>  <span class="co"># Set x-axis label</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare data for each deviation</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>angular_diameter_data <span class="ot">&lt;-</span> <span class="fu">prepare_data_diameter</span>(cleandata, <span class="st">`</span><span class="at">Desviación angular</span><span class="st">`</span>)</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>coronal_diameter_data <span class="ot">&lt;-</span> <span class="fu">prepare_data_diameter</span>(cleandata, <span class="st">`</span><span class="at">Desviación coronal</span><span class="st">`</span>)</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>apical_diameter_data <span class="ot">&lt;-</span> <span class="fu">prepare_data_diameter</span>(cleandata, <span class="st">`</span><span class="at">Desviación apical</span><span class="st">`</span>)</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>profundidad_diameter_data <span class="ot">&lt;-</span> <span class="fu">prepare_data_diameter</span>(cleandata, <span class="st">`</span><span class="at">Desviación de profundidad</span><span class="st">`</span>)</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Create each plot with a y-axis label only on one plot</span></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>plot_angular_diameter <span class="ot">&lt;-</span> <span class="fu">create_plot_diameter</span>(angular_diameter_data, <span class="st">`</span><span class="at">Desviación angular</span><span class="st">`</span>, <span class="st">"Desviación Angular"</span>, <span class="st">"Media (IC 95%)"</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>plot_coronal_diameter <span class="ot">&lt;-</span> <span class="fu">create_plot_diameter</span>(coronal_diameter_data, <span class="st">`</span><span class="at">Desviación coronal</span><span class="st">`</span>, <span class="st">"Desviación Coronal"</span>, <span class="st">"Media (IC 95%)"</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>plot_apical_diameter <span class="ot">&lt;-</span> <span class="fu">create_plot_diameter</span>(apical_diameter_data, <span class="st">`</span><span class="at">Desviación apical</span><span class="st">`</span>, <span class="st">"Desviación Apical"</span>, <span class="st">"Media (IC 95%)"</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>plot_profundidad_diameter <span class="ot">&lt;-</span> <span class="fu">create_plot_diameter</span>(profundidad_diameter_data, <span class="st">`</span><span class="at">Desviación de profundidad</span><span class="st">`</span>, <span class="st">"Desviación de Profundidad"</span>, <span class="st">"Media (IC 95%)"</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(plot_angular_diameter, plot_coronal_diameter, plot_apical_diameter, plot_profundidad_diameter,</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">2</span>, </span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">align =</span> <span class="st">"v"</span>, <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">common.legend =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="st">"top"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="960"></p>
+<figcaption>Figura 3: Medias de desviaciones según diametro del implante y tipo de cirugía.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>prepare_data_length <span class="ot">&lt;-</span> <span class="cf">function</span>(data, var) {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  data_by_length <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Longitud del implante</span><span class="st">`</span>, <span class="st">`</span><span class="at">Tipo de cirugía</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">mean_val =</span> <span class="fu">mean</span>({{ var }}, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">sd_val =</span> <span class="fu">sd</span>({{ var }}, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">n =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>({{ var }})), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">se =</span> sd_val <span class="sc">/</span> <span class="fu">sqrt</span>(n),</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">ci_lower =</span> <span class="fu">pmax</span>(<span class="dv">0</span>, mean_val <span class="sc">-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> se), </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">ci_upper =</span> mean_val <span class="sc">+</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> se)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(data_by_length)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>create_plot_length <span class="ot">&lt;-</span> <span class="cf">function</span>(data, var_name, title, y_label, <span class="at">show_y_label =</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Longitud del implante</span><span class="st">`</span>, <span class="at">y =</span> mean_val, <span class="at">fill =</span> <span class="st">`</span><span class="at">Tipo de cirugía</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> ci_lower, <span class="at">ymax =</span> ci_upper), <span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.2f"</span>, mean_val)), </span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>              <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), </span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>              <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, </span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Convencional"</span> <span class="ot">=</span> <span class="st">"darkviolet"</span>, <span class="st">"Guiada"</span> <span class="ot">=</span> <span class="st">"blue3"</span>, <span class="st">"Total"</span> <span class="ot">=</span> <span class="st">"cyan3"</span>)) <span class="sc">+</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> title,</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="cf">if</span> (show_y_label) y_label <span class="cf">else</span> <span class="cn">NULL</span>,</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Longitud del Implante"</span>) <span class="sc">+</span>  </span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>angular_length_data <span class="ot">&lt;-</span> <span class="fu">prepare_data_length</span>(cleandata, <span class="st">`</span><span class="at">Desviación angular</span><span class="st">`</span>)</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>coronal_length_data <span class="ot">&lt;-</span> <span class="fu">prepare_data_length</span>(cleandata, <span class="st">`</span><span class="at">Desviación coronal</span><span class="st">`</span>)</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>apical_length_data <span class="ot">&lt;-</span> <span class="fu">prepare_data_length</span>(cleandata, <span class="st">`</span><span class="at">Desviación apical</span><span class="st">`</span>)</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>profundidad_length_data <span class="ot">&lt;-</span> <span class="fu">prepare_data_length</span>(cleandata, <span class="st">`</span><span class="at">Desviación de profundidad</span><span class="st">`</span>)</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>plot_angular_length <span class="ot">&lt;-</span> <span class="fu">create_plot_length</span>(angular_length_data, <span class="st">`</span><span class="at">Desviación angular</span><span class="st">`</span>, <span class="st">"Desviación Angular"</span>, <span class="st">"Media (IC 95%)"</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>plot_coronal_length <span class="ot">&lt;-</span> <span class="fu">create_plot_length</span>(coronal_length_data, <span class="st">`</span><span class="at">Desviación coronal</span><span class="st">`</span>, <span class="st">"Desviación Coronal"</span>, <span class="st">"Media (IC 95%)"</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>plot_apical_length <span class="ot">&lt;-</span> <span class="fu">create_plot_length</span>(apical_length_data, <span class="st">`</span><span class="at">Desviación apical</span><span class="st">`</span>, <span class="st">"Desviación Apical"</span>, <span class="st">"Media (IC 95%)"</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>plot_profundidad_length <span class="ot">&lt;-</span> <span class="fu">create_plot_length</span>(profundidad_length_data, <span class="st">`</span><span class="at">Desviación de profundidad</span><span class="st">`</span>, <span class="st">"Desviación de Profundidad"</span>, <span class="st">"Media (IC 95%)"</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(plot_angular_length, plot_coronal_length, plot_apical_length, plot_profundidad_length,</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">2</span>, </span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">align =</span> <span class="st">"v"</span>, <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">common.legend =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="st">"top"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="960"></p>
+<figcaption>Figura 4: Medias de desviaciones según longitud del implante y tipo de cirugía.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to prepare data for mean and confidence interval by systemic disease</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>prepare_data_disease <span class="ot">&lt;-</span> <span class="cf">function</span>(data, var) {</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  data_by_disease <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Enfermedad sistémica</span><span class="st">`</span>, <span class="st">`</span><span class="at">Tipo de cirugía</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">mean_val =</span> <span class="fu">mean</span>({{ var }}, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sd_val =</span> <span class="fu">sd</span>({{ var }}, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">n =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>({{ var }})), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">se =</span> sd_val <span class="sc">/</span> <span class="fu">sqrt</span>(n),</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">ci_lower =</span> <span class="fu">pmax</span>(<span class="dv">0</span>, mean_val <span class="sc">-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> se), </span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">ci_upper =</span> mean_val <span class="sc">+</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> se)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(data_by_disease)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to create a plot for means by systemic disease</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>create_plot_disease <span class="ot">&lt;-</span> <span class="cf">function</span>(data, var_name, title, y_label, <span class="at">show_y_label =</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Enfermedad sistémica</span><span class="st">`</span>, <span class="at">y =</span> mean_val, <span class="at">fill =</span> <span class="st">`</span><span class="at">Tipo de cirugía</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> ci_lower, <span class="at">ymax =</span> ci_upper), <span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.2f"</span>, mean_val)), </span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>              <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), </span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>              <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, </span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Convencional"</span> <span class="ot">=</span> <span class="st">"darkviolet"</span>, <span class="st">"Guiada"</span> <span class="ot">=</span> <span class="st">"blue3"</span>, <span class="st">"Total"</span> <span class="ot">=</span> <span class="st">"cyan3"</span>)) <span class="sc">+</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> title,</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="cf">if</span> (show_y_label) y_label <span class="cf">else</span> <span class="cn">NULL</span>,</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Enfermedad Sistémica"</span>) <span class="sc">+</span>  </span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare data for each deviation by systemic disease</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>angular_disease_data <span class="ot">&lt;-</span> <span class="fu">prepare_data_disease</span>(cleandata, <span class="st">`</span><span class="at">Desviación angular</span><span class="st">`</span>)</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>coronal_disease_data <span class="ot">&lt;-</span> <span class="fu">prepare_data_disease</span>(cleandata, <span class="st">`</span><span class="at">Desviación coronal</span><span class="st">`</span>)</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>apical_disease_data <span class="ot">&lt;-</span> <span class="fu">prepare_data_disease</span>(cleandata, <span class="st">`</span><span class="at">Desviación apical</span><span class="st">`</span>)</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>profundidad_disease_data <span class="ot">&lt;-</span> <span class="fu">prepare_data_disease</span>(cleandata, <span class="st">`</span><span class="at">Desviación de profundidad</span><span class="st">`</span>)</span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plots for each deviation</span></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>plot_angular_disease <span class="ot">&lt;-</span> <span class="fu">create_plot_disease</span>(angular_disease_data, <span class="st">`</span><span class="at">Desviación angular</span><span class="st">`</span>, <span class="st">"Desviación Angular"</span>, <span class="st">"Media (IC 95%)"</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>plot_coronal_disease <span class="ot">&lt;-</span> <span class="fu">create_plot_disease</span>(coronal_disease_data, <span class="st">`</span><span class="at">Desviación coronal</span><span class="st">`</span>, <span class="st">"Desviación Coronal"</span>, <span class="st">"Media (IC 95%)"</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>plot_apical_disease <span class="ot">&lt;-</span> <span class="fu">create_plot_disease</span>(apical_disease_data, <span class="st">`</span><span class="at">Desviación apical</span><span class="st">`</span>, <span class="st">"Desviación Apical"</span>, <span class="st">"Media (IC 95%)"</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>plot_profundidad_disease <span class="ot">&lt;-</span> <span class="fu">create_plot_disease</span>(profundidad_disease_data, <span class="st">`</span><span class="at">Desviación de profundidad</span><span class="st">`</span>, <span class="st">"Desviación de Profundidad"</span>, <span class="st">"Media (IC 95%)"</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrange plots in a grid</span></span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(plot_angular_disease, plot_coronal_disease, plot_apical_disease, plot_profundidad_disease,</span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">2</span>, </span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>          <span class="at">align =</span> <span class="st">"v"</span>, <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>          <span class="at">common.legend =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="st">"top"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="960"></p>
+<figcaption>Figura 5: Medias de desviaciones según presencia de alguna enfermedad sitémica y tipo de cirugía.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="análisis-estadístico-bivariado." class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="análisis-estadístico-bivariado."><span class="header-section-number">4.2</span> Análisis estadístico bivariado.</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>variables <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Desviación angular"</span>, <span class="st">"Desviación coronal"</span>, <span class="st">"Desviación apical"</span>, <span class="st">"Desviación de profundidad"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>results_list <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (variable <span class="cf">in</span> variables) {</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  means_by_surgery <span class="ot">&lt;-</span> cleandata <span class="sc">%&gt;%</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Tipo de cirugía</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">media =</span> <span class="fu">mean</span>(.data[[variable]], <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">'drop'</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  media_convencional <span class="ot">&lt;-</span> means_by_surgery <span class="sc">%&gt;%</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="st">`</span><span class="at">Tipo de cirugía</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Convencional"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(media)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  media_guiada <span class="ot">&lt;-</span> means_by_surgery <span class="sc">%&gt;%</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="st">`</span><span class="at">Tipo de cirugía</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Guiada"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(media)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  test_result <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(data[[variable]] <span class="sc">~</span> <span class="st">`</span><span class="at">Tipo de cirugía</span><span class="st">`</span>, <span class="at">data =</span> cleandata, <span class="at">exact =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  media_diff <span class="ot">&lt;-</span> media_convencional <span class="sc">-</span> media_guiada</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  estadistico <span class="ot">&lt;-</span> test_result<span class="sc">$</span>statistic</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>  valor_p <span class="ot">&lt;-</span> test_result<span class="sc">$</span>p.value</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>  summary_result <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">Variable =</span> variable,</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Media Cirugía Convencional"</span> <span class="ot">=</span> media_convencional,</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Media Cirugía Guiada"</span> <span class="ot">=</span> media_guiada,</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Difernecias de medias"</span> <span class="ot">=</span> media_diff,</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>    Estadístico <span class="ot">=</span> estadistico,</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Valor P"</span> <span class="ot">=</span> valor_p</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>  results_list[[variable]] <span class="ot">&lt;-</span> summary_result</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>all_results <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, results_list)</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(all_results) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Variable"</span>, <span class="st">"Media Cirugía Convencional"</span>, <span class="st">"Media Cirugía Guiada"</span>, <span class="st">"Diferencias de medias"</span>, <span class="st">"Estadístico U"</span>, <span class="st">"Valor P"</span>)</span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a><span class="fu">gt</span>(all_results)  <span class="sc">%&gt;%</span> </span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_caption</span>(<span class="at">caption =</span> <span class="st">"Tabla 4: Análisis estadístico para la comparación de medias de las desviaciones según tipo de cirugía (Test Mann Whitney)."</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="hfhltfepon" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hfhltfepon table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#hfhltfepon thead, #hfhltfepon tbody, #hfhltfepon tfoot, #hfhltfepon tr, #hfhltfepon td, #hfhltfepon th {
+  border-style: none;
+}
+
+#hfhltfepon p {
+  margin: 0;
+  padding: 0;
+}
+
+#hfhltfepon .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#hfhltfepon .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#hfhltfepon .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#hfhltfepon .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#hfhltfepon .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hfhltfepon .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hfhltfepon .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hfhltfepon .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#hfhltfepon .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#hfhltfepon .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#hfhltfepon .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#hfhltfepon .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#hfhltfepon .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#hfhltfepon .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#hfhltfepon .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hfhltfepon .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#hfhltfepon .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#hfhltfepon .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#hfhltfepon .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hfhltfepon .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#hfhltfepon .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#hfhltfepon .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#hfhltfepon .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hfhltfepon .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#hfhltfepon .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#hfhltfepon .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hfhltfepon .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hfhltfepon .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#hfhltfepon .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hfhltfepon .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#hfhltfepon .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hfhltfepon .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hfhltfepon .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hfhltfepon .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hfhltfepon .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hfhltfepon .gt_left {
+  text-align: left;
+}
+
+#hfhltfepon .gt_center {
+  text-align: center;
+}
+
+#hfhltfepon .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#hfhltfepon .gt_font_normal {
+  font-weight: normal;
+}
+
+#hfhltfepon .gt_font_bold {
+  font-weight: bold;
+}
+
+#hfhltfepon .gt_font_italic {
+  font-style: italic;
+}
+
+#hfhltfepon .gt_super {
+  font-size: 65%;
+}
+
+#hfhltfepon .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#hfhltfepon .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#hfhltfepon .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#hfhltfepon .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#hfhltfepon .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#hfhltfepon .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#hfhltfepon .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<caption>Tabla 4: Análisis estadístico para la comparación de medias de las desviaciones según tipo de cirugía (Test Mann Whitney).</caption>
+<thead>
+<tr class="header gt_col_headings">
+<th id="Variable" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Variable</th>
+<th id="Media Cirugía Convencional" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Media Cirugía Convencional</th>
+<th id="Media Cirugía Guiada" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Media Cirugía Guiada</th>
+<th id="Diferencias de medias" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Diferencias de medias</th>
+<th id="Estadístico U" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Estadístico U</th>
+<th id="Valor P" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Valor P</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Variable">Desviación angular</td>
+<td class="gt_row gt_right" headers="Media Cirugía Convencional">6.1161905</td>
+<td class="gt_row gt_right" headers="Media Cirugía Guiada">3.864444</td>
+<td class="gt_row gt_right" headers="Diferencias de medias">2.2517460</td>
+<td class="gt_row gt_right" headers="Estadístico U">262.5</td>
+<td class="gt_row gt_right" headers="Valor P">0.03971026</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Variable">Desviación coronal</td>
+<td class="gt_row gt_right" headers="Media Cirugía Convencional">1.7461905</td>
+<td class="gt_row gt_right" headers="Media Cirugía Guiada">1.038333</td>
+<td class="gt_row gt_right" headers="Diferencias de medias">0.7078571</td>
+<td class="gt_row gt_right" headers="Estadístico U">277.0</td>
+<td class="gt_row gt_right" headers="Valor P">0.01368575</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Variable">Desviación apical</td>
+<td class="gt_row gt_right" headers="Media Cirugía Convencional">2.3104762</td>
+<td class="gt_row gt_right" headers="Media Cirugía Guiada">1.287778</td>
+<td class="gt_row gt_right" headers="Diferencias de medias">1.0226984</td>
+<td class="gt_row gt_right" headers="Estadístico U">280.0</td>
+<td class="gt_row gt_right" headers="Valor P">0.01077427</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Variable">Desviación de profundidad</td>
+<td class="gt_row gt_right" headers="Media Cirugía Convencional">0.5295238</td>
+<td class="gt_row gt_right" headers="Media Cirugía Guiada">0.290000</td>
+<td class="gt_row gt_right" headers="Diferencias de medias">0.2395238</td>
+<td class="gt_row gt_right" headers="Estadístico U">258.0</td>
+<td class="gt_row gt_right" headers="Valor P">0.05253570</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate means and confidence intervals</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>calculate_means_ci <span class="ot">&lt;-</span> <span class="cf">function</span>(data, var) {</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  means_by_surgery <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Tipo de cirugía</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarize</span>(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">media =</span> <span class="fu">mean</span>(.data[[var]], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">sd =</span> <span class="fu">sd</span>(.data[[var]], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">n =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(.data[[var]])),</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">.groups =</span> <span class="st">'drop'</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">se =</span> sd <span class="sc">/</span> <span class="fu">sqrt</span>(n),</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">ci_lower =</span> media <span class="sc">-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> se,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">ci_upper =</span> media <span class="sc">+</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> se,</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">Variable =</span> var</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(means_by_surgery)</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform the calculations for each variable</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>variables <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Desviación angular"</span>, <span class="st">"Desviación coronal"</span>, <span class="st">"Desviación apical"</span>, <span class="st">"Desviación de profundidad"</span>)</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>means_ci_list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(variables, calculate_means_ci, <span class="at">data =</span> cleandata)</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>means_ci_data <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, means_ci_list)</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Add p-values to the data</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>p_values <span class="ot">&lt;-</span> <span class="fu">sapply</span>(variables, <span class="cf">function</span>(var) {</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>  test_result <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(cleandata[[var]] <span class="sc">~</span> <span class="st">`</span><span class="at">Tipo de cirugía</span><span class="st">`</span>, <span class="at">data =</span> cleandata, <span class="at">exact =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(test_result<span class="sc">$</span>p.value)</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare data for plotting</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>means_ci_data<span class="sc">$</span>P_Value <span class="ot">&lt;-</span> <span class="fu">rep</span>(p_values, <span class="at">each =</span> <span class="dv">2</span>) <span class="co"># Two entries per variable for each surgery type</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot</span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(means_ci_data, <span class="fu">aes</span>(<span class="at">x =</span> Variable, <span class="at">y =</span> media, <span class="at">fill =</span> <span class="st">`</span><span class="at">Tipo de cirugía</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> ci_lower, <span class="at">ymax =</span> ci_upper), <span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.8</span>), <span class="at">alpha=</span><span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.2f"</span>, media)), </span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="dv">1</span>), </span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, </span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> Variable, <span class="at">y =</span> <span class="fu">max</span>(ci_upper) <span class="sc">+</span> <span class="fl">0.5</span>, <span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"p = %.3f"</span>, P_Value)),</span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.8</span>), </span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, </span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="fl">3.5</span>, </span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>            <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Convencional"</span> <span class="ot">=</span> <span class="st">"darkviolet"</span>, <span class="st">"Guiada"</span> <span class="ot">=</span> <span class="st">"blue3"</span>)) <span class="sc">+</span></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Comparación de Medias de Desviaciones según Tipo de Cirugía."</span>,</span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Media (IC 95%)"</span>,</span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">""</span>,</span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Tipo de Cirugía"</span>) <span class="sc">+</span></span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>Figura 6: Comparación de Medias de Desviaciones según Tipo de Cirugía (Test Mann Whitney).</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(cleandata) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">" "</span>, <span class="st">"_"</span>, <span class="fu">colnames</span>(cleandata))  <span class="co"># Reemplazar espacios con guiones bajos</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(cleandata) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"á"</span>, <span class="st">"a"</span>, <span class="fu">colnames</span>(cleandata))  <span class="co"># Reemplazar acentos agudos</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(cleandata) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"é"</span>, <span class="st">"e"</span>, <span class="fu">colnames</span>(cleandata))</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(cleandata) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"í"</span>, <span class="st">"i"</span>, <span class="fu">colnames</span>(cleandata))</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(cleandata) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"ó"</span>, <span class="st">"o"</span>, <span class="fu">colnames</span>(cleandata))</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(cleandata) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"ú"</span>, <span class="st">"u"</span>, <span class="fu">colnames</span>(cleandata))</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>variables_independientes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Longitud_del_implante"</span>, <span class="st">"Diametro_del_Implante"</span>, <span class="st">"Sector_del_Implante"</span>, <span class="st">"Enfermedad_sistemica"</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>variables_dependientes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Desviacion_angular"</span>, <span class="st">"Desviacion_coronal"</span>, <span class="st">"Desviacion_apical"</span>, <span class="st">"Desviacion_de_profundidad"</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear una lista para almacenar los resultados</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>resultados <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (indep <span class="cf">in</span> variables_independientes) {</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (dep <span class="cf">in</span> variables_dependientes) {</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Construir la fórmula</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        formula <span class="ot">&lt;-</span> <span class="fu">as.formula</span>(<span class="fu">paste</span>(dep, <span class="st">"~ Tipo_de_cirugia *"</span>, indep))</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Realizar la prueba Scheirer-Ray-Hare y guardar el resultado sin imprimir</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        <span class="fu">invisible</span>({</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>            <span class="fu">invisible</span>(resultado <span class="ot">&lt;-</span> <span class="fu">scheirerRayHare</span>(formula, <span class="at">data =</span> cleandata))</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Guardar los resultados en la lista</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>            resultados[[<span class="fu">paste</span>(dep, indep, <span class="at">sep =</span> <span class="st">"_vs_"</span>)]] <span class="ot">&lt;-</span> resultado</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>        })</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear un data frame para resumir los resultados de interacción</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>interaction_summary <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Variable_Dependiente =</span> <span class="fu">character</span>(),</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">Variable_Independiente =</span> <span class="fu">character</span>(),</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">H_Statistic_Interaccion =</span> <span class="fu">numeric</span>(),</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">p_value_Interaccion =</span> <span class="fu">numeric</span>(),</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Poblar el data frame con los resultados de interacción</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (name <span class="cf">in</span> <span class="fu">names</span>(resultados)) {</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">invisible</span>({</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>        res <span class="ot">&lt;-</span> resultados[[name]]</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Filtrar la fila de la interacción</span></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>        interaction_row <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"Tipo_de_cirugia:.*"</span>, <span class="fu">rownames</span>(res))</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (<span class="fu">length</span>(interaction_row) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>            interaction_summary <span class="ot">&lt;-</span> <span class="fu">rbind</span>(interaction_summary, <span class="fu">data.frame</span>(</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>                <span class="at">Variable_Dependiente =</span> <span class="fu">unlist</span>(<span class="fu">strsplit</span>(name, <span class="st">"_vs_"</span>))[<span class="dv">1</span>],</span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>                <span class="at">Variable_Independiente =</span> <span class="fu">rownames</span>(res)[interaction_row],</span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>                <span class="at">H_Statistic_Interaccion =</span> res<span class="sc">$</span>H[interaction_row],</span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>                <span class="at">p_value_Interaccion =</span> res<span class="sc">$</span>p.value[interaction_row]</span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>            ))</span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Ordenar la tabla por Variable_Dependiente</span></span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>interaction_summary <span class="ot">&lt;-</span> interaction_summary[<span class="fu">order</span>(interaction_summary<span class="sc">$</span>Variable_Dependiente),]</span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>interaction_summary<span class="sc">$</span>Variable_Independiente <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"_"</span>, <span class="st">" "</span>, interaction_summary<span class="sc">$</span>Variable_Independiente)</span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>interaction_summary<span class="sc">$</span>Variable_Dependiente <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"_"</span>, <span class="st">" "</span>, interaction_summary<span class="sc">$</span>Variable_Dependiente)</span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>interaction_summary<span class="sc">$</span>Variable_Dependiente <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"Desviacion"</span>, <span class="st">"Desviación"</span>, interaction_summary<span class="sc">$</span>Variable_Dependiente)</span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>interaction_summary<span class="sc">$</span>Variable_Independiente <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"Longitud del implante"</span>, <span class="st">"Longitud del implante"</span>, interaction_summary<span class="sc">$</span>Variable_Independiente)</span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>interaction_summary<span class="sc">$</span>Variable_Independiente <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"Diametro del Implante"</span>, <span class="st">"Diámetro del Implante"</span>, interaction_summary<span class="sc">$</span>Variable_Independiente)</span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>interaction_summary<span class="sc">$</span>Variable_Independiente <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"Sector del Implante"</span>, <span class="st">"Sector del Implante"</span>, interaction_summary<span class="sc">$</span>Variable_Independiente)</span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>interaction_summary<span class="sc">$</span>Variable_Independiente <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"Enfermedad sistemica"</span>, <span class="st">"Enfermedad sistémica"</span>, interaction_summary<span class="sc">$</span>Variable_Independiente)</span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>interaction_summary<span class="sc">$</span>Variable_Independiente <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">":"</span>, <span class="st">" * "</span>, interaction_summary<span class="sc">$</span>Variable_Independiente)</span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(interaction_summary) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"_"</span>, <span class="st">" "</span>, <span class="fu">colnames</span>(interaction_summary))</span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(interaction_summary) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"H Statistic Interaccion"</span>, <span class="st">"Estadístico H"</span>, <span class="fu">colnames</span>(interaction_summary))</span>
+<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(interaction_summary) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"p value Interaccion"</span>, <span class="st">"Valor P"</span>, <span class="fu">colnames</span>(interaction_summary))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gt</span>(interaction_summary)  <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_caption</span>(<span class="at">caption =</span> <span class="st">"Tabla 5: Análisis estadístico para la comparación de medias de las desviaciones según tipo de cirugía y otra vasriable independiete (Test Scheirer-Ray-Hare)."</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="yaohsmhsgk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#yaohsmhsgk table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#yaohsmhsgk thead, #yaohsmhsgk tbody, #yaohsmhsgk tfoot, #yaohsmhsgk tr, #yaohsmhsgk td, #yaohsmhsgk th {
+  border-style: none;
+}
+
+#yaohsmhsgk p {
+  margin: 0;
+  padding: 0;
+}
+
+#yaohsmhsgk .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#yaohsmhsgk .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#yaohsmhsgk .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#yaohsmhsgk .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#yaohsmhsgk .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#yaohsmhsgk .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yaohsmhsgk .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#yaohsmhsgk .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#yaohsmhsgk .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#yaohsmhsgk .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#yaohsmhsgk .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#yaohsmhsgk .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#yaohsmhsgk .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#yaohsmhsgk .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#yaohsmhsgk .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#yaohsmhsgk .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#yaohsmhsgk .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#yaohsmhsgk .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#yaohsmhsgk .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yaohsmhsgk .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#yaohsmhsgk .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#yaohsmhsgk .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#yaohsmhsgk .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yaohsmhsgk .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#yaohsmhsgk .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#yaohsmhsgk .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yaohsmhsgk .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yaohsmhsgk .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#yaohsmhsgk .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yaohsmhsgk .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#yaohsmhsgk .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yaohsmhsgk .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#yaohsmhsgk .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yaohsmhsgk .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#yaohsmhsgk .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yaohsmhsgk .gt_left {
+  text-align: left;
+}
+
+#yaohsmhsgk .gt_center {
+  text-align: center;
+}
+
+#yaohsmhsgk .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#yaohsmhsgk .gt_font_normal {
+  font-weight: normal;
+}
+
+#yaohsmhsgk .gt_font_bold {
+  font-weight: bold;
+}
+
+#yaohsmhsgk .gt_font_italic {
+  font-style: italic;
+}
+
+#yaohsmhsgk .gt_super {
+  font-size: 65%;
+}
+
+#yaohsmhsgk .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#yaohsmhsgk .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#yaohsmhsgk .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#yaohsmhsgk .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#yaohsmhsgk .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#yaohsmhsgk .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#yaohsmhsgk .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<caption>Tabla 5: Análisis estadístico para la comparación de medias de las desviaciones según tipo de cirugía y otra vasriable independiete (Test Scheirer-Ray-Hare).</caption>
+<thead>
+<tr class="header gt_col_headings">
+<th id="Variable Dependiente" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Variable Dependiente</th>
+<th id="Variable Independiente" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Variable Independiente</th>
+<th id="Estadístico H" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Estadístico H</th>
+<th id="Valor P" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Valor P</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Variable Dependiente">Desviación angular</td>
+<td class="gt_row gt_left" headers="Variable Independiente">Tipo de cirugia * Longitud del implante</td>
+<td class="gt_row gt_right" headers="Estadístico H">4.0879589872</td>
+<td class="gt_row gt_right" headers="Valor P">0.25212145</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Variable Dependiente">Desviación angular</td>
+<td class="gt_row gt_left" headers="Variable Independiente">Tipo de cirugia * Diámetro del Implante</td>
+<td class="gt_row gt_right" headers="Estadístico H">3.0702685339</td>
+<td class="gt_row gt_right" headers="Valor P">0.07973630</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Variable Dependiente">Desviación angular</td>
+<td class="gt_row gt_left" headers="Variable Independiente">Tipo de cirugia * Sector del Implante</td>
+<td class="gt_row gt_right" headers="Estadístico H">3.2364974625</td>
+<td class="gt_row gt_right" headers="Valor P">0.19824558</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Variable Dependiente">Desviación angular</td>
+<td class="gt_row gt_left" headers="Variable Independiente">Tipo de cirugia * Enfermedad sistémica</td>
+<td class="gt_row gt_right" headers="Estadístico H">0.0419236333</td>
+<td class="gt_row gt_right" headers="Valor P">0.83776541</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Variable Dependiente">Desviación apical</td>
+<td class="gt_row gt_left" headers="Variable Independiente">Tipo de cirugia * Longitud del implante</td>
+<td class="gt_row gt_right" headers="Estadístico H">0.5081260578</td>
+<td class="gt_row gt_right" headers="Valor P">0.91710256</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Variable Dependiente">Desviación apical</td>
+<td class="gt_row gt_left" headers="Variable Independiente">Tipo de cirugia * Diámetro del Implante</td>
+<td class="gt_row gt_right" headers="Estadístico H">0.0006271543</td>
+<td class="gt_row gt_right" headers="Valor P">0.98002063</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Variable Dependiente">Desviación apical</td>
+<td class="gt_row gt_left" headers="Variable Independiente">Tipo de cirugia * Sector del Implante</td>
+<td class="gt_row gt_right" headers="Estadístico H">2.8388337956</td>
+<td class="gt_row gt_right" headers="Valor P">0.24185500</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Variable Dependiente">Desviación apical</td>
+<td class="gt_row gt_left" headers="Variable Independiente">Tipo de cirugia * Enfermedad sistémica</td>
+<td class="gt_row gt_right" headers="Estadístico H">2.2001213589</td>
+<td class="gt_row gt_right" headers="Valor P">0.13799987</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Variable Dependiente">Desviación coronal</td>
+<td class="gt_row gt_left" headers="Variable Independiente">Tipo de cirugia * Longitud del implante</td>
+<td class="gt_row gt_right" headers="Estadístico H">0.2026614776</td>
+<td class="gt_row gt_right" headers="Valor P">0.97715850</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Variable Dependiente">Desviación coronal</td>
+<td class="gt_row gt_left" headers="Variable Independiente">Tipo de cirugia * Diámetro del Implante</td>
+<td class="gt_row gt_right" headers="Estadístico H">0.0381652688</td>
+<td class="gt_row gt_right" headers="Valor P">0.84511165</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Variable Dependiente">Desviación coronal</td>
+<td class="gt_row gt_left" headers="Variable Independiente">Tipo de cirugia * Sector del Implante</td>
+<td class="gt_row gt_right" headers="Estadístico H">6.6005158965</td>
+<td class="gt_row gt_right" headers="Valor P">0.03687365</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Variable Dependiente">Desviación coronal</td>
+<td class="gt_row gt_left" headers="Variable Independiente">Tipo de cirugia * Enfermedad sistémica</td>
+<td class="gt_row gt_right" headers="Estadístico H">2.0954072824</td>
+<td class="gt_row gt_right" headers="Valor P">0.14774234</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Variable Dependiente">Desviación de profundidad</td>
+<td class="gt_row gt_left" headers="Variable Independiente">Tipo de cirugia * Longitud del implante</td>
+<td class="gt_row gt_right" headers="Estadístico H">3.2849622818</td>
+<td class="gt_row gt_right" headers="Valor P">0.34974111</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Variable Dependiente">Desviación de profundidad</td>
+<td class="gt_row gt_left" headers="Variable Independiente">Tipo de cirugia * Diámetro del Implante</td>
+<td class="gt_row gt_right" headers="Estadístico H">1.9395918079</td>
+<td class="gt_row gt_right" headers="Valor P">0.16371286</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Variable Dependiente">Desviación de profundidad</td>
+<td class="gt_row gt_left" headers="Variable Independiente">Tipo de cirugia * Sector del Implante</td>
+<td class="gt_row gt_right" headers="Estadístico H">5.0852259930</td>
+<td class="gt_row gt_right" headers="Valor P">0.07866059</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Variable Dependiente">Desviación de profundidad</td>
+<td class="gt_row gt_left" headers="Variable Independiente">Tipo de cirugia * Enfermedad sistémica</td>
+<td class="gt_row gt_right" headers="Estadístico H">0.3423137288</td>
+<td class="gt_row gt_right" headers="Valor P">0.55849673</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>cleandata<span class="sc">$</span>Tipo_de_cirugia <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(cleandata<span class="sc">$</span>Tipo_de_cirugia)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>cleandata<span class="sc">$</span>Sector_del_Implante <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(cleandata<span class="sc">$</span>Sector_del_Implante)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Realizar la prueba de Dunn</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>dunn_result <span class="ot">&lt;-</span> <span class="fu">dunn.test</span>(cleandata<span class="sc">$</span>Desviacion_coronal, cleandata<span class="sc">$</span>Tipo_de_cirugia<span class="sc">:</span>cleandata<span class="sc">$</span>Sector_del_Implante, </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">method =</span> <span class="st">"bonferroni"</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>dunn_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    Comparación <span class="ot">=</span> dunn_result<span class="sc">$</span>comparisons,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    Estadístico<span class="at">_Z =</span> dunn_result<span class="sc">$</span>Z,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">Valor_P_Ajustado =</span> dunn_result<span class="sc">$</span>P.adjusted,</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dunn_df <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Comparaciones Múltiples Post Hoc"</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">vars</span>(Estadístico_Z, Valor_P_Ajustado),</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">3</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    Comparación <span class="ot">=</span> <span class="st">"Comparación"</span>,</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    Estadístico<span class="at">_Z =</span> <span class="st">"Estadístico Z"</span>,</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">Valor_P_Ajustado =</span> <span class="st">"Valor P Ajustado"</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_caption</span>(<span class="at">caption =</span> <span class="st">"Tabla 6: Resultados de la Prueba de Dunn."</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="ltthofdsom" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ltthofdsom table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ltthofdsom thead, #ltthofdsom tbody, #ltthofdsom tfoot, #ltthofdsom tr, #ltthofdsom td, #ltthofdsom th {
+  border-style: none;
+}
+
+#ltthofdsom p {
+  margin: 0;
+  padding: 0;
+}
+
+#ltthofdsom .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ltthofdsom .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ltthofdsom .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ltthofdsom .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ltthofdsom .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ltthofdsom .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ltthofdsom .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ltthofdsom .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ltthofdsom .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ltthofdsom .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ltthofdsom .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ltthofdsom .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ltthofdsom .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ltthofdsom .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ltthofdsom .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ltthofdsom .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ltthofdsom .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ltthofdsom .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ltthofdsom .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ltthofdsom .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ltthofdsom .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ltthofdsom .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ltthofdsom .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ltthofdsom .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ltthofdsom .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ltthofdsom .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ltthofdsom .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ltthofdsom .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ltthofdsom .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ltthofdsom .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ltthofdsom .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ltthofdsom .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ltthofdsom .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ltthofdsom .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ltthofdsom .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ltthofdsom .gt_left {
+  text-align: left;
+}
+
+#ltthofdsom .gt_center {
+  text-align: center;
+}
+
+#ltthofdsom .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ltthofdsom .gt_font_normal {
+  font-weight: normal;
+}
+
+#ltthofdsom .gt_font_bold {
+  font-weight: bold;
+}
+
+#ltthofdsom .gt_font_italic {
+  font-style: italic;
+}
+
+#ltthofdsom .gt_super {
+  font-size: 65%;
+}
+
+#ltthofdsom .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ltthofdsom .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ltthofdsom .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ltthofdsom .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ltthofdsom .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ltthofdsom .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ltthofdsom .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<caption>Tabla 6: Resultados de la Prueba de Dunn.</caption>
+<thead>
+<tr class="header gt_heading">
+<th colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border">Comparaciones Múltiples Post Hoc</th>
+</tr>
+<tr class="odd gt_col_headings">
+<th id="Comparación" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Comparación</th>
+<th id="Estadístico Z" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Estadístico Z</th>
+<th id="Valor P Ajustado" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Valor P Ajustado</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Comparación">Convencional:Mandibular posterior - Convencional:Maxilar anterior</td>
+<td class="gt_row gt_right" headers="Estadístico_Z">1.117</td>
+<td class="gt_row gt_right" headers="Valor_P_Ajustado">1.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Comparación">Convencional:Mandibular posterior - Convencional:Maxilar posterior</td>
+<td class="gt_row gt_right" headers="Estadístico_Z">−1.432</td>
+<td class="gt_row gt_right" headers="Valor_P_Ajustado">1.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Comparación">Convencional:Maxilar anterior - Convencional:Maxilar posterior</td>
+<td class="gt_row gt_right" headers="Estadístico_Z">−1.727</td>
+<td class="gt_row gt_right" headers="Valor_P_Ajustado">0.884</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Comparación">Convencional:Mandibular posterior - Guiada:Mandibular anterior</td>
+<td class="gt_row gt_right" headers="Estadístico_Z">0.866</td>
+<td class="gt_row gt_right" headers="Valor_P_Ajustado">1.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Comparación">Convencional:Maxilar anterior - Guiada:Mandibular anterior</td>
+<td class="gt_row gt_right" headers="Estadístico_Z">−0.186</td>
+<td class="gt_row gt_right" headers="Valor_P_Ajustado">1.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Comparación">Convencional:Maxilar posterior - Guiada:Mandibular anterior</td>
+<td class="gt_row gt_right" headers="Estadístico_Z">1.476</td>
+<td class="gt_row gt_right" headers="Valor_P_Ajustado">1.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Comparación">Convencional:Mandibular posterior - Guiada:Mandibular posterior</td>
+<td class="gt_row gt_right" headers="Estadístico_Z">0.689</td>
+<td class="gt_row gt_right" headers="Valor_P_Ajustado">1.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Comparación">Convencional:Maxilar anterior - Guiada:Mandibular posterior</td>
+<td class="gt_row gt_right" headers="Estadístico_Z">−0.796</td>
+<td class="gt_row gt_right" headers="Valor_P_Ajustado">1.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Comparación">Convencional:Maxilar posterior - Guiada:Mandibular posterior</td>
+<td class="gt_row gt_right" headers="Estadístico_Z">2.039</td>
+<td class="gt_row gt_right" headers="Valor_P_Ajustado">0.435</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Comparación">Guiada:Mandibular anterior - Guiada:Mandibular posterior</td>
+<td class="gt_row gt_right" headers="Estadístico_Z">−0.548</td>
+<td class="gt_row gt_right" headers="Valor_P_Ajustado">1.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Comparación">Convencional:Mandibular posterior - Guiada:Maxilar anterior</td>
+<td class="gt_row gt_right" headers="Estadístico_Z">0.311</td>
+<td class="gt_row gt_right" headers="Valor_P_Ajustado">1.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Comparación">Convencional:Maxilar anterior - Guiada:Maxilar anterior</td>
+<td class="gt_row gt_right" headers="Estadístico_Z">−0.883</td>
+<td class="gt_row gt_right" headers="Valor_P_Ajustado">1.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Comparación">Convencional:Maxilar posterior - Guiada:Maxilar anterior</td>
+<td class="gt_row gt_right" headers="Estadístico_Z">1.394</td>
+<td class="gt_row gt_right" headers="Valor_P_Ajustado">1.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Comparación">Guiada:Mandibular anterior - Guiada:Maxilar anterior</td>
+<td class="gt_row gt_right" headers="Estadístico_Z">−0.647</td>
+<td class="gt_row gt_right" headers="Valor_P_Ajustado">1.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Comparación">Guiada:Mandibular posterior - Guiada:Maxilar anterior</td>
+<td class="gt_row gt_right" headers="Estadístico_Z">−0.233</td>
+<td class="gt_row gt_right" headers="Valor_P_Ajustado">1.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Comparación">Convencional:Mandibular posterior - Guiada:Maxilar posterior</td>
+<td class="gt_row gt_right" headers="Estadístico_Z">2.042</td>
+<td class="gt_row gt_right" headers="Valor_P_Ajustado">0.432</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Comparación">Convencional:Maxilar anterior - Guiada:Maxilar posterior</td>
+<td class="gt_row gt_right" headers="Estadístico_Z">−0.048</td>
+<td class="gt_row gt_right" headers="Valor_P_Ajustado">1.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Comparación">Convencional:Maxilar posterior - Guiada:Maxilar posterior</td>
+<td class="gt_row gt_right" headers="Estadístico_Z">3.211</td>
+<td class="gt_row gt_right" headers="Valor_P_Ajustado">0.014</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Comparación">Guiada:Mandibular anterior - Guiada:Maxilar posterior</td>
+<td class="gt_row gt_right" headers="Estadístico_Z">0.192</td>
+<td class="gt_row gt_right" headers="Valor_P_Ajustado">1.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Comparación">Guiada:Mandibular posterior - Guiada:Maxilar posterior</td>
+<td class="gt_row gt_right" headers="Estadístico_Z">1.389</td>
+<td class="gt_row gt_right" headers="Valor_P_Ajustado">1.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Comparación">Guiada:Maxilar anterior - Guiada:Maxilar posterior</td>
+<td class="gt_row gt_right" headers="Estadístico_Z">1.393</td>
+<td class="gt_row gt_right" headers="Valor_P_Ajustado">1.000</td>
 </tr>
 </tbody>
 </table>

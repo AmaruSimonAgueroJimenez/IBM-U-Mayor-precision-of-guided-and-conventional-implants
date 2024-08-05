@@ -36,7 +36,7 @@ install_and_load_packages <- function(packages) {
   }
 }
 
-necessary_packages <- c("haven", "knitr", "readxl", "tidyverse","Hmisc", "data.table", "survey", "scales","gt","FactoMineR","factoextra","vcd","reshape2","corrplot","klaR", "stringr","table1")
+necessary_packages <- c("haven", "knitr", "readxl", "tidyverse","Hmisc", "data.table", "survey", "scales","gt","FactoMineR","factoextra","vcd","reshape2","corrplot","klaR", "stringr","table1","ggpubr","rcompanion", "dunn.test")
 
 install_and_load_packages(necessary_packages)
 
@@ -161,15 +161,17 @@ De acuerdo a lo anterior se determina que el tamaño muestral es de 13 implantes
 
 Para las variables numéricas (desviaciones), se evaluó normalidad con el test Shapiro-Wilk, se calcularon la media con sus respectivos intervalos de confianza, la desviación estándar, los valores mínimos, los cuartiles (Q1, mediana, Q3) y los valores máximos. Para las variables categóricas, se calcularon las frecuencias absolutas y relativas para cada nivel de la variable.
 
-Se utilizó la prueba de Kruskal-Wallis para evaluar las diferencias entre las variables dependientes y las variables independientes categóricas. Esta prueba no paramétrica es adecuada para comparar tres o más grupos independientes y no asume una distribución normal de los datos.
+Para comparar las diferencias de medias de las desviasionbes, entre tipo de cirugía convenciona y guiada, se utilizó la prueba de Mann-Whitney U, una prueba estadística no paramétrica.
 
-Se realizaron comparaciones post hoc utilizando la prueba de Dunn para identificar diferencias significativas entre pares de grupos específicos dentro de cada variable independiente. Esta prueba se utilizó debido a su capacidad para comparar dos grupos independientes y su aplicabilidad a datos no paramétricos.
+Se utilizó la prueba Scheirer-Ray-Hare (extensión de la prueba de Kruskal-Wallis para dos factores) para evaluar las diferencias entre las variables dependientes y tipo de cirugía y otras variables independientes categóricas. Esta prueba no paramétrica es adecuada para comparar 1 o más grupos independientes y no asume una distribución normal de los datos.
+
+Se realizaron comparaciones post hoc utilizando la prueba de Dunn para identificar diferencias significativas entre pares de grupos específicos dentro de cada variable independiente según tipo de cirgugía. Esta prueba se utilizó debido a su capacidad para comparar dos grupos independientes y su aplicabilidad a datos no paramétricos.
 
 Todos los datos se analizaron mediante pruebas de dos colas con un nivel de significancia de $\alpha=0,05$ y se estimaron intervalos de confianza (IC) con un nivel de confianza de $1-\alpha=0,95$. El análisis estadístico se realizó utilizando el software estadístico R (Versión 4.4) y Rstudio (Versión 2023.03.0+386).
 
 # Resultados.
 
-## Análisis descriptivo
+## Análisis estadístico descriptivo.
 
 ```{r}
 groupdata <- cleandata %>% dplyr::select(c(1:7,9)) %>% distinct()
@@ -210,7 +212,7 @@ table1(~ Edad + Sexo + `Enfermedad sistémica` + Fumador + `Año de atención de
        caption = "Tabla 2: Características clínicas y sociodemográficas de los pacientes según tipo de cirugía",
        footnote = "Nota: Variables numéricas: Media (Desviación Estandar) [Intervalo de confianza 95%], Variables categóricas: Fecuencia absoluta (Porcentaje) [Intervalo de confianza 95%]")
 
-table1(~ `Zona del implante` + `Sector del Implante`  + `Longitud del implante` + `Diámetro del Implante` + `Desviación angular` + `Desviación  coronal` + `Desviación apical` +  `Desviación de profundidad` | `Tipo de cirugía`, 
+table1(~ `Zona del implante` + `Sector del Implante`  + `Longitud del implante` + `Diámetro del Implante` + `Desviación angular` + `Desviación coronal` + `Desviación apical` +  `Desviación de profundidad` | `Tipo de cirugía`, 
        data = cleandata, 
        overall = "Total",
        render.continuous = mean_sd_ci,
@@ -219,4 +221,506 @@ table1(~ `Zona del implante` + `Sector del Implante`  + `Longitud del implante` 
        footnote = "Nota: Variables numéricas: Media (Desviación Estandar) [Intervalo de confianza 95%], Variables categóricas: Fecuencia absoluta (Porcentaje) [Intervalo de confianza 95%]")
 ```
 
+```{r}
+#| fig-height: 12
+#| fig-width: 8
+#| fig-cap: "Figura 1: Proporciones de variables independietes según tipo de cirugía."
+
+prepare_data <- function(data, var) {
+  data_by_type <- data %>%
+    group_by(`Tipo de cirugía`, {{ var }}) %>%
+    dplyr::summarize(n = n(), .groups = 'drop') %>%
+    mutate(prop = n / sum(n),
+           ci_lower = pmax(0, prop - qnorm(0.975) * sqrt(prop * (1 - prop) / sum(n))),
+           ci_upper = pmin(1, prop + qnorm(0.975) * sqrt(prop * (1 - prop) / sum(n))))
+
+  data_total <- data %>%
+    group_by({{ var }}) %>%
+    dplyr::summarize(n = n(), .groups = 'drop') %>%
+    mutate(prop = n / sum(n),
+           ci_lower = pmax(0, prop - qnorm(0.975) * sqrt(prop * (1 - prop) / sum(n))),
+           ci_upper = pmin(1, prop + qnorm(0.975) * sqrt(prop * (1 - prop) / sum(n))),
+           `Tipo de cirugía` = "Total")
+  combined_data <- bind_rows(data_by_type, data_total)
+  
+  return(combined_data)
+}
+
+create_plot <- function(data, var, title, x_label, show_y_label = FALSE) {
+  ggplot(data, aes(x = {{ var }}, y = prop, fill = `Tipo de cirugía`)) +
+    geom_bar(stat = "identity", position = position_dodge(width = 0.9), alpha = 0.5) +
+    geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper), width = 0.2, position = position_dodge(width = 0.9), alpha = 0.3) +
+    geom_text(aes(label = sprintf("%.1f%%", prop * 100)), 
+              position = position_dodge(width = 0.9), 
+              vjust = -0.5, 
+              size = 3.5) +
+    scale_fill_manual(values = c("Convencional" = "darkviolet", "Guiada" = "blue3", "Total" = "cyan3")) +
+    labs(title = title,
+         y = if (show_y_label) "Proporción (IC 95%)" else NULL,
+         x = x_label) +
+    theme_minimal() +
+    theme(legend.position = "top")
+}
+
+sector_data <- prepare_data(cleandata, `Sector del Implante`)
+diametro_data <- prepare_data(cleandata, `Diámetro del Implante`)
+longitud_data <- prepare_data(cleandata, `Longitud del implante`)
+
+plot_sector <- create_plot(sector_data, `Sector del Implante`, "Proporción de Sector del Implante por Tipo de Cirugía", "Sector del Implante", FALSE)
+plot_diametro <- create_plot(diametro_data, `Diámetro del Implante`, "Proporción de Diámetro del Implante por Tipo de Cirugía", "Diámetro del Implante", TRUE)
+plot_longitud <- create_plot(longitud_data, `Longitud del implante`, "Proporción de Longitud del Implante por Tipo de Cirugía", "Longitud del Implante", FALSE)
+
+ggarrange(plot_sector, plot_diametro, plot_longitud, 
+          ncol = 1, nrow = 3, 
+          common.legend = TRUE, legend = "top",
+          align = "v", heights = c(1, 1, 1))
+
+```
+
+```{r}
+#| fig-height: 8
+#| fig-width: 8
+#| fig-cap: "Figura 2: Medias de desviaciones según tipo de cirugía."
+
+prepare_data_mean <- function(data, var) {
+  data_by_type <- data %>%
+    group_by(`Tipo de cirugía`) %>%
+    dplyr::summarize(mean_val = mean({{ var }}, na.rm = TRUE),
+              sd_val = sd({{ var }}, na.rm = TRUE),
+              n = sum(!is.na({{ var }})), .groups = 'drop') %>%
+    mutate(se = sd_val / sqrt(n),
+           ci_lower = mean_val - qt(0.975, df = n - 1) * se,
+           ci_upper = mean_val + qt(0.975, df = n - 1) * se)
+
+  data_total <- data %>%
+    dplyr::summarize(mean_val = mean({{ var }}, na.rm = TRUE),
+              sd_val = sd({{ var }}, na.rm = TRUE),
+              n = sum(!is.na({{ var }})), .groups = 'drop') %>%
+    mutate(se = sd_val / sqrt(n),
+           ci_lower = mean_val - qt(0.975, df = n - 1) * se,
+           ci_upper = mean_val + qt(0.975, df = n - 1) * se,
+           `Tipo de cirugía` = "Total")
+
+  combined_data <- bind_rows(data_by_type, data_total)
+  
+  return(combined_data)
+}
+
+create_plot_mean <- function(data, var_name, title, y_label, show_y_label = FALSE) {
+  ggplot(data, aes(x = `Tipo de cirugía`, y = mean_val, fill = `Tipo de cirugía`)) +
+    geom_bar(stat = "identity", position = position_dodge(width = 0.9), alpha = 0.5) +
+    geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper), width = 0.2, position = position_dodge(width = 0.9), alpha = 0.3) +
+    geom_text(aes(label = sprintf("%.2f", mean_val)), 
+              position = position_dodge(width = 0.9), 
+              vjust = -0.5, 
+              size = 3.5) +
+    scale_fill_manual(values = c("Convencional" = "darkviolet", "Guiada" = "blue3", "Total" = "cyan3")) +
+    labs(title = title,
+         y = if (show_y_label) y_label else NULL,
+         x = NULL) +  # Remove x-axis label
+    theme_minimal() +
+    theme(legend.position = "top")
+}
+
+angular_data <- prepare_data_mean(cleandata, `Desviación angular`)
+coronal_data <- prepare_data_mean(cleandata, `Desviación coronal`)
+apical_data <- prepare_data_mean(cleandata, `Desviación apical`)
+profundidad_data <- prepare_data_mean(cleandata, `Desviación de profundidad`)
+
+plot_angular <- create_plot_mean(angular_data, `Desviación angular`, "Desviación Angular", "Media (IC 95%)", TRUE)
+plot_coronal <- create_plot_mean(coronal_data, `Desviación coronal`, "Desviación Coronal", "Media (IC 95%)", FALSE)
+plot_apical <- create_plot_mean(apical_data, `Desviación apical`, "Desviación Apical", "Media (IC 95%)", TRUE)
+plot_profundidad <- create_plot_mean(profundidad_data, `Desviación de profundidad`, "Desviación de Profundidad", "Media (IC 95%)", FALSE)
+
+ggarrange(plot_angular, plot_coronal, plot_apical, plot_profundidad,
+                                 ncol = 2, nrow = 2, 
+                                 align = "v", heights = c(1, 1, 1, 1),
+                                 common.legend = TRUE, legend = "top")
+
+```
+
+```{r}
+#| fig-height: 10
+#| fig-width: 10
+#| fig-cap: "Figura 3: Medias de desviaciones según diametro del implante y tipo de cirugía."
+
+# Function to prepare data for mean and confidence interval by implant diameter
+prepare_data_diameter <- function(data, var) {
+  # Group and calculate mean and confidence intervals by implant diameter and surgery type
+  data_by_diameter <- data %>%
+    group_by(`Diámetro del Implante`, `Tipo de cirugía`) %>%
+    dplyr::summarize(mean_val = mean({{ var }}, na.rm = TRUE),
+              sd_val = sd({{ var }}, na.rm = TRUE),
+              n = sum(!is.na({{ var }})), .groups = 'drop') %>%
+    mutate(se = sd_val / sqrt(n),
+           ci_lower = pmax(0, mean_val - qt(0.975, df = n - 1) * se), # Ensure lower CI is non-negative
+           ci_upper = mean_val + qt(0.975, df = n - 1) * se)
+  
+  return(data_by_diameter)
+}
+
+# Function to create a plot for means by implant diameter
+create_plot_diameter <- function(data, var_name, title, y_label, show_y_label = FALSE) {
+  ggplot(data, aes(x = `Diámetro del Implante`, y = mean_val, fill = `Tipo de cirugía`)) +
+    geom_bar(stat = "identity", position = position_dodge(width = 0.9), alpha = 0.5) +
+    geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper), width = 0.2, position = position_dodge(width = 0.9), alpha = 0.3) +
+    geom_text(aes(label = sprintf("%.2f", mean_val)), 
+              position = position_dodge(width = 0.9), 
+              vjust = -0.5, 
+              size = 3.5) +
+    scale_fill_manual(values = c("Convencional" = "darkviolet", "Guiada" = "blue3", "Total" = "cyan3")) +
+    labs(title = title,
+         y = if (show_y_label) y_label else NULL,
+         x = "Diámetro del Implante") +  # Set x-axis label
+    theme_minimal() +
+    theme(legend.position = "top")
+}
+
+# Prepare data for each deviation
+angular_diameter_data <- prepare_data_diameter(cleandata, `Desviación angular`)
+coronal_diameter_data <- prepare_data_diameter(cleandata, `Desviación coronal`)
+apical_diameter_data <- prepare_data_diameter(cleandata, `Desviación apical`)
+profundidad_diameter_data <- prepare_data_diameter(cleandata, `Desviación de profundidad`)
+
+# Create each plot with a y-axis label only on one plot
+plot_angular_diameter <- create_plot_diameter(angular_diameter_data, `Desviación angular`, "Desviación Angular", "Media (IC 95%)", TRUE)
+plot_coronal_diameter <- create_plot_diameter(coronal_diameter_data, `Desviación coronal`, "Desviación Coronal", "Media (IC 95%)", FALSE)
+plot_apical_diameter <- create_plot_diameter(apical_diameter_data, `Desviación apical`, "Desviación Apical", "Media (IC 95%)", TRUE)
+plot_profundidad_diameter <- create_plot_diameter(profundidad_diameter_data, `Desviación de profundidad`, "Desviación de Profundidad", "Media (IC 95%)", FALSE)
+
+
+ggarrange(plot_angular_diameter, plot_coronal_diameter, plot_apical_diameter, plot_profundidad_diameter,
+                                     ncol = 2, nrow = 2, 
+                                     align = "v", heights = c(1, 1, 1, 1),
+                                     common.legend = TRUE, legend = "top")
+
+```
+
+```{r}
+#| fig-height: 10
+#| fig-width: 10
+#| fig-cap: "Figura 4: Medias de desviaciones según longitud del implante y tipo de cirugía."
+
+prepare_data_length <- function(data, var) {
+  data_by_length <- data %>%
+    group_by(`Longitud del implante`, `Tipo de cirugía`) %>%
+    dplyr::summarize(mean_val = mean({{ var }}, na.rm = TRUE),
+              sd_val = sd({{ var }}, na.rm = TRUE),
+              n = sum(!is.na({{ var }})), .groups = 'drop') %>%
+    mutate(se = sd_val / sqrt(n),
+           ci_lower = pmax(0, mean_val - qt(0.975, df = n - 1) * se), 
+           ci_upper = mean_val + qt(0.975, df = n - 1) * se)
+  
+  return(data_by_length)
+}
+
+create_plot_length <- function(data, var_name, title, y_label, show_y_label = FALSE) {
+  ggplot(data, aes(x = `Longitud del implante`, y = mean_val, fill = `Tipo de cirugía`)) +
+    geom_bar(stat = "identity", position = position_dodge(width = 0.9), alpha = 0.5) +
+    geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper), width = 0.2, position = position_dodge(width = 0.9), alpha = 0.3) +
+    geom_text(aes(label = sprintf("%.2f", mean_val)), 
+              position = position_dodge(width = 0.9), 
+              vjust = -0.5, 
+              size = 3.5) +
+    scale_fill_manual(values = c("Convencional" = "darkviolet", "Guiada" = "blue3", "Total" = "cyan3")) +
+    labs(title = title,
+         y = if (show_y_label) y_label else NULL,
+         x = "Longitud del Implante") +  
+    theme_minimal() +
+    theme(legend.position = "top")
+}
+
+angular_length_data <- prepare_data_length(cleandata, `Desviación angular`)
+coronal_length_data <- prepare_data_length(cleandata, `Desviación coronal`)
+apical_length_data <- prepare_data_length(cleandata, `Desviación apical`)
+profundidad_length_data <- prepare_data_length(cleandata, `Desviación de profundidad`)
+
+plot_angular_length <- create_plot_length(angular_length_data, `Desviación angular`, "Desviación Angular", "Media (IC 95%)", TRUE)
+plot_coronal_length <- create_plot_length(coronal_length_data, `Desviación coronal`, "Desviación Coronal", "Media (IC 95%)", FALSE)
+plot_apical_length <- create_plot_length(apical_length_data, `Desviación apical`, "Desviación Apical", "Media (IC 95%)", TRUE)
+plot_profundidad_length <- create_plot_length(profundidad_length_data, `Desviación de profundidad`, "Desviación de Profundidad", "Media (IC 95%)", FALSE)
+
+ggarrange(plot_angular_length, plot_coronal_length, plot_apical_length, plot_profundidad_length,
+                                   ncol = 2, nrow = 2, 
+                                   align = "v", heights = c(1, 1, 1, 1),
+                                   common.legend = TRUE, legend = "top")
+
+```
+
+```{r}
+#| fig-height: 10
+#| fig-width: 10
+#| fig-cap: "Figura 5: Medias de desviaciones según presencia de alguna enfermedad sitémica y tipo de cirugía."
+
+# Function to prepare data for mean and confidence interval by systemic disease
+prepare_data_disease <- function(data, var) {
+  data_by_disease <- data %>%
+    group_by(`Enfermedad sistémica`, `Tipo de cirugía`) %>%
+    dplyr::summarize(mean_val = mean({{ var }}, na.rm = TRUE),
+                     sd_val = sd({{ var }}, na.rm = TRUE),
+                     n = sum(!is.na({{ var }})), .groups = 'drop') %>%
+    mutate(se = sd_val / sqrt(n),
+           ci_lower = pmax(0, mean_val - qt(0.975, df = n - 1) * se), 
+           ci_upper = mean_val + qt(0.975, df = n - 1) * se)
+  
+  return(data_by_disease)
+}
+
+# Function to create a plot for means by systemic disease
+create_plot_disease <- function(data, var_name, title, y_label, show_y_label = FALSE) {
+  ggplot(data, aes(x = `Enfermedad sistémica`, y = mean_val, fill = `Tipo de cirugía`)) +
+    geom_bar(stat = "identity", position = position_dodge(width = 0.9), alpha = 0.5) +
+    geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper), width = 0.2, position = position_dodge(width = 0.9), alpha = 0.3) +
+    geom_text(aes(label = sprintf("%.2f", mean_val)), 
+              position = position_dodge(width = 0.9), 
+              vjust = -0.5, 
+              size = 3.5) +
+    scale_fill_manual(values = c("Convencional" = "darkviolet", "Guiada" = "blue3", "Total" = "cyan3")) +
+    labs(title = title,
+         y = if (show_y_label) y_label else NULL,
+         x = "Enfermedad Sistémica") +  
+    theme_minimal() +
+    theme(legend.position = "top")
+}
+
+# Prepare data for each deviation by systemic disease
+angular_disease_data <- prepare_data_disease(cleandata, `Desviación angular`)
+coronal_disease_data <- prepare_data_disease(cleandata, `Desviación coronal`)
+apical_disease_data <- prepare_data_disease(cleandata, `Desviación apical`)
+profundidad_disease_data <- prepare_data_disease(cleandata, `Desviación de profundidad`)
+
+# Create plots for each deviation
+plot_angular_disease <- create_plot_disease(angular_disease_data, `Desviación angular`, "Desviación Angular", "Media (IC 95%)", TRUE)
+plot_coronal_disease <- create_plot_disease(coronal_disease_data, `Desviación coronal`, "Desviación Coronal", "Media (IC 95%)", FALSE)
+plot_apical_disease <- create_plot_disease(apical_disease_data, `Desviación apical`, "Desviación Apical", "Media (IC 95%)", TRUE)
+plot_profundidad_disease <- create_plot_disease(profundidad_disease_data, `Desviación de profundidad`, "Desviación de Profundidad", "Media (IC 95%)", FALSE)
+
+# Arrange plots in a grid
+ggarrange(plot_angular_disease, plot_coronal_disease, plot_apical_disease, plot_profundidad_disease,
+          ncol = 2, nrow = 2, 
+          align = "v", heights = c(1, 1),
+          common.legend = TRUE, legend = "top")
+```
+
+## Análisis estadístico bivariado.
+
+```{r}
+variables <- c("Desviación angular", "Desviación coronal", "Desviación apical", "Desviación de profundidad")
+
+results_list <- list()
+
+for (variable in variables) {
+
+  means_by_surgery <- cleandata %>%
+    group_by(`Tipo de cirugía`) %>%
+    dplyr::summarize(media = mean(.data[[variable]], na.rm = TRUE), .groups = 'drop')
+  
+  media_convencional <- means_by_surgery %>%
+    filter(`Tipo de cirugía` == "Convencional") %>%
+    pull(media)
+  
+  media_guiada <- means_by_surgery %>%
+    filter(`Tipo de cirugía` == "Guiada") %>%
+    pull(media)
+  
+  test_result <- wilcox.test(data[[variable]] ~ `Tipo de cirugía`, data = cleandata, exact = FALSE)
+  
+  media_diff <- media_convencional - media_guiada
+  
+  estadistico <- test_result$statistic
+  
+  valor_p <- test_result$p.value
+  
+  summary_result <- data.frame(
+    Variable = variable,
+    "Media Cirugía Convencional" = media_convencional,
+    "Media Cirugía Guiada" = media_guiada,
+    "Difernecias de medias" = media_diff,
+    Estadístico = estadistico,
+    "Valor P" = valor_p
+  )
+  results_list[[variable]] <- summary_result
+}
+
+all_results <- do.call(rbind, results_list)
+
+colnames(all_results) <- c("Variable", "Media Cirugía Convencional", "Media Cirugía Guiada", "Diferencias de medias", "Estadístico U", "Valor P")
+
+gt(all_results)  %>% 
+  tab_caption(caption = "Tabla 4: Análisis estadístico para la comparación de medias de las desviaciones según tipo de cirugía (Test Mann Whitney).")
+```
+
+```{r}
+#| fig-height: 6
+#| fig-width: 6
+#| fig-cap: "Figura 6: Comparación de Medias de Desviaciones según Tipo de Cirugía (Test Mann Whitney)."
+# Calculate means and confidence intervals
+calculate_means_ci <- function(data, var) {
+  means_by_surgery <- data %>%
+    group_by(`Tipo de cirugía`) %>%
+    dplyr::summarize(
+      media = mean(.data[[var]], na.rm = TRUE),
+      sd = sd(.data[[var]], na.rm = TRUE),
+      n = sum(!is.na(.data[[var]])),
+      .groups = 'drop'
+    ) %>%
+    mutate(
+      se = sd / sqrt(n),
+      ci_lower = media - qt(0.975, df = n - 1) * se,
+      ci_upper = media + qt(0.975, df = n - 1) * se,
+      Variable = var
+    )
+  
+  return(means_by_surgery)
+}
+
+# Perform the calculations for each variable
+variables <- c("Desviación angular", "Desviación coronal", "Desviación apical", "Desviación de profundidad")
+means_ci_list <- lapply(variables, calculate_means_ci, data = cleandata)
+means_ci_data <- do.call(rbind, means_ci_list)
+
+# Add p-values to the data
+p_values <- sapply(variables, function(var) {
+  test_result <- wilcox.test(cleandata[[var]] ~ `Tipo de cirugía`, data = cleandata, exact = FALSE)
+  return(test_result$p.value)
+})
+
+# Prepare data for plotting
+means_ci_data$P_Value <- rep(p_values, each = 2) # Two entries per variable for each surgery type
+
+# Create the plot
+ggplot(means_ci_data, aes(x = Variable, y = media, fill = `Tipo de cirugía`)) +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.9), alpha = 0.5) +
+  geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper), width = 0.2, position = position_dodge(width = 0.8), alpha=0.3) +
+  geom_text(aes(label = sprintf("%.2f", media)), 
+            position = position_dodge(width = 1), 
+            vjust = -0.5, 
+            size = 3.5) +
+  geom_text(aes(x = Variable, y = max(ci_upper) + 0.5, label = sprintf("p = %.3f", P_Value)),
+            position = position_dodge(width = 0.8), 
+            vjust = -0.5, 
+            size = 3.5, 
+            inherit.aes = FALSE) +
+  scale_fill_manual(values = c("Convencional" = "darkviolet", "Guiada" = "blue3")) +
+  labs(title = "Comparación de Medias de Desviaciones según Tipo de Cirugía.",
+       y = "Media (IC 95%)",
+       x = "",
+       fill = "Tipo de Cirugía") +
+  theme_minimal() +
+  theme(legend.position = "top")
+
+
+
+```
+
+```{r, message=FALSE, results='hide'}
+colnames(cleandata) <- gsub(" ", "_", colnames(cleandata))  # Reemplazar espacios con guiones bajos
+colnames(cleandata) <- gsub("á", "a", colnames(cleandata))  # Reemplazar acentos agudos
+colnames(cleandata) <- gsub("é", "e", colnames(cleandata))
+colnames(cleandata) <- gsub("í", "i", colnames(cleandata))
+colnames(cleandata) <- gsub("ó", "o", colnames(cleandata))
+colnames(cleandata) <- gsub("ú", "u", colnames(cleandata))
+
+variables_independientes <- c("Longitud_del_implante", "Diametro_del_Implante", "Sector_del_Implante", "Enfermedad_sistemica")
+variables_dependientes <- c("Desviacion_angular", "Desviacion_coronal", "Desviacion_apical", "Desviacion_de_profundidad")
+
+# Crear una lista para almacenar los resultados
+resultados <- list()
+for (indep in variables_independientes) {
+    for (dep in variables_dependientes) {
+        # Construir la fórmula
+        formula <- as.formula(paste(dep, "~ Tipo_de_cirugia *", indep))
+        
+        # Realizar la prueba Scheirer-Ray-Hare y guardar el resultado sin imprimir
+        invisible({
+            invisible(resultado <- scheirerRayHare(formula, data = cleandata))
+            # Guardar los resultados en la lista
+            resultados[[paste(dep, indep, sep = "_vs_")]] <- resultado
+        })
+    }
+}
+
+# Crear un data frame para resumir los resultados de interacción
+interaction_summary <- data.frame(Variable_Dependiente = character(),
+                                  Variable_Independiente = character(),
+                                  H_Statistic_Interaccion = numeric(),
+                                  p_value_Interaccion = numeric(),
+                                  stringsAsFactors = FALSE)
+
+# Poblar el data frame con los resultados de interacción
+for (name in names(resultados)) {
+    invisible({
+        res <- resultados[[name]]
+        # Filtrar la fila de la interacción
+        interaction_row <- grep("Tipo_de_cirugia:.*", rownames(res))
+        if (length(interaction_row) > 0) {
+            interaction_summary <- rbind(interaction_summary, data.frame(
+                Variable_Dependiente = unlist(strsplit(name, "_vs_"))[1],
+                Variable_Independiente = rownames(res)[interaction_row],
+                H_Statistic_Interaccion = res$H[interaction_row],
+                p_value_Interaccion = res$p.value[interaction_row]
+            ))
+        }
+    })
+}
+
+# Ordenar la tabla por Variable_Dependiente
+interaction_summary <- interaction_summary[order(interaction_summary$Variable_Dependiente),]
+
+interaction_summary$Variable_Independiente <- gsub("_", " ", interaction_summary$Variable_Independiente)
+interaction_summary$Variable_Dependiente <- gsub("_", " ", interaction_summary$Variable_Dependiente)
+interaction_summary$Variable_Dependiente <- gsub("Desviacion", "Desviación", interaction_summary$Variable_Dependiente)
+interaction_summary$Variable_Independiente <- gsub("Longitud del implante", "Longitud del implante", interaction_summary$Variable_Independiente)
+interaction_summary$Variable_Independiente <- gsub("Diametro del Implante", "Diámetro del Implante", interaction_summary$Variable_Independiente)
+interaction_summary$Variable_Independiente <- gsub("Sector del Implante", "Sector del Implante", interaction_summary$Variable_Independiente)
+interaction_summary$Variable_Independiente <- gsub("Enfermedad sistemica", "Enfermedad sistémica", interaction_summary$Variable_Independiente)
+interaction_summary$Variable_Independiente <- gsub(":", " * ", interaction_summary$Variable_Independiente)
+colnames(interaction_summary) <- gsub("_", " ", colnames(interaction_summary))
+colnames(interaction_summary) <- gsub("H Statistic Interaccion", "Estadístico H", colnames(interaction_summary))
+colnames(interaction_summary) <- gsub("p value Interaccion", "Valor P", colnames(interaction_summary))
+
+
+
+```
+
+```{r}
+gt(interaction_summary)  %>% 
+  tab_caption(caption = "Tabla 5: Análisis estadístico para la comparación de medias de las desviaciones según tipo de cirugía y otra vasriable independiete (Test Scheirer-Ray-Hare).")
+```
+
+```{r, message=FALSE, results='hide'}
+cleandata$Tipo_de_cirugia <- as.factor(cleandata$Tipo_de_cirugia)
+cleandata$Sector_del_Implante <- as.factor(cleandata$Sector_del_Implante)
+
+# Realizar la prueba de Dunn
+dunn_result <- dunn.test(cleandata$Desviacion_coronal, cleandata$Tipo_de_cirugia:cleandata$Sector_del_Implante, 
+                         method = "bonferroni")
+
+dunn_df <- data.frame(
+    Comparación = dunn_result$comparisons,
+    Estadístico_Z = dunn_result$Z,
+    Valor_P_Ajustado = dunn_result$P.adjusted,
+    stringsAsFactors = FALSE
+)
+
+```
+```{r}
+
+dunn_df %>%
+  gt() %>%
+  tab_header(
+    title = "Comparaciones Múltiples Post Hoc"
+  ) %>%
+  fmt_number(
+    columns = vars(Estadístico_Z, Valor_P_Ajustado),
+    decimals = 3
+  ) %>%
+  cols_label(
+    Comparación = "Comparación",
+    Estadístico_Z = "Estadístico Z",
+    Valor_P_Ajustado = "Valor P Ajustado"
+  ) %>% 
+  tab_caption(caption = "Tabla 6: Resultados de la Prueba de Dunn.")
+
+```
 
