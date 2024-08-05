@@ -318,7 +318,7 @@ create_plot_mean <- function(data, var_name, title, y_label, show_y_label = FALS
     scale_fill_manual(values = c("Convencional" = "darkviolet", "Guiada" = "blue3", "Total" = "cyan3")) +
     labs(title = title,
          y = if (show_y_label) y_label else NULL,
-         x = NULL) +  # Remove x-axis label
+         x = NULL) +
     theme_minimal() +
     theme(legend.position = "top")
 }
@@ -342,25 +342,79 @@ ggarrange(plot_angular, plot_coronal, plot_apical, plot_profundidad,
 
 ```{r}
 #| fig-height: 10
-#| fig-width: 10
-#| fig-cap: "Figura 3: Medias de desviaciones según diametro del implante y tipo de cirugía."
+#| fig-width: 12
+#| fig-cap: "Figura 3: Medias de desviaciones según sector del implante y tipo de cirugía."
 
-# Function to prepare data for mean and confidence interval by implant diameter
+library(ggplot2)
+library(dplyr)
+library(ggpubr)
+
+prepare_data_sector <- function(data, var) {
+  data_by_sector <- data %>%
+    group_by(`Sector del Implante`, `Tipo de cirugía`) %>%
+    dplyr::summarize(mean_val = mean({{ var }}, na.rm = TRUE),
+                     sd_val = sd({{ var }}, na.rm = TRUE),
+                     n = sum(!is.na({{ var }})), .groups = 'drop') %>%
+    mutate(se = sd_val / sqrt(n),
+           ci_lower = pmax(0, mean_val - qt(0.975, df = n - 1) * se),
+           ci_upper = mean_val + qt(0.975, df = n - 1) * se)
+  
+  return(data_by_sector)
+}
+
+create_plot_sector <- function(data, var_name, title, y_label, show_y_label = FALSE) {
+  ggplot(data, aes(x = `Sector del Implante`, y = mean_val, fill = `Tipo de cirugía`)) +
+    geom_bar(stat = "identity", position = position_dodge(width = 0.9), alpha = 0.5) +
+    geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper), width = 0.2, position = position_dodge(width = 0.9), alpha = 0.3) +
+    geom_text(aes(label = sprintf("%.2f", mean_val)), 
+              position = position_dodge(width = 0.9), 
+              vjust = -0.5, 
+              size = 3.5) +
+    scale_fill_manual(values = c("Convencional" = "darkviolet", "Guiada" = "blue3", "Total" = "cyan3")) +
+    labs(title = title,
+         y = if (show_y_label) y_label else NULL,
+         x = "Sector del Implante") +  
+    theme_minimal() +
+    theme(legend.position = "top")
+}
+
+# Prepare data for each deviation by sector of implant
+angular_sector_data <- prepare_data_sector(cleandata, `Desviación angular`)
+coronal_sector_data <- prepare_data_sector(cleandata, `Desviación coronal`)
+apical_sector_data <- prepare_data_sector(cleandata, `Desviación apical`)
+profundidad_sector_data <- prepare_data_sector(cleandata, `Desviación de profundidad`)
+
+# Create plots for each deviation by sector of implant
+plot_angular_sector <- create_plot_sector(angular_sector_data, `Desviación angular`, "Desviación Angular", "Media (IC 95%)", TRUE)
+plot_coronal_sector <- create_plot_sector(coronal_sector_data, `Desviación coronal`, "Desviación Coronal", "Media (IC 95%)", FALSE)
+plot_apical_sector <- create_plot_sector(apical_sector_data, `Desviación apical`, "Desviación Apical", "Media (IC 95%)", TRUE)
+plot_profundidad_sector <- create_plot_sector(profundidad_sector_data, `Desviación de profundidad`, "Desviación de Profundidad", "Media (IC 95%)", FALSE)
+
+# Arrange plots in a grid
+ggarrange(plot_angular_sector, plot_coronal_sector, plot_apical_sector, plot_profundidad_sector,
+          ncol = 2, nrow = 2, 
+          align = "v", heights = c(1, 1),
+          common.legend = TRUE, legend = "top")
+```
+
+```{r}
+#| fig-height: 10
+#| fig-width: 10
+#| fig-cap: "Figura 4: Medias de desviaciones según diametro del implante y tipo de cirugía."
+
 prepare_data_diameter <- function(data, var) {
-  # Group and calculate mean and confidence intervals by implant diameter and surgery type
   data_by_diameter <- data %>%
     group_by(`Diámetro del Implante`, `Tipo de cirugía`) %>%
     dplyr::summarize(mean_val = mean({{ var }}, na.rm = TRUE),
               sd_val = sd({{ var }}, na.rm = TRUE),
               n = sum(!is.na({{ var }})), .groups = 'drop') %>%
     mutate(se = sd_val / sqrt(n),
-           ci_lower = pmax(0, mean_val - qt(0.975, df = n - 1) * se), # Ensure lower CI is non-negative
+           ci_lower = pmax(0, mean_val - qt(0.975, df = n - 1) * se),
            ci_upper = mean_val + qt(0.975, df = n - 1) * se)
   
   return(data_by_diameter)
 }
 
-# Function to create a plot for means by implant diameter
 create_plot_diameter <- function(data, var_name, title, y_label, show_y_label = FALSE) {
   ggplot(data, aes(x = `Diámetro del Implante`, y = mean_val, fill = `Tipo de cirugía`)) +
     geom_bar(stat = "identity", position = position_dodge(width = 0.9), alpha = 0.5) +
@@ -372,18 +426,16 @@ create_plot_diameter <- function(data, var_name, title, y_label, show_y_label = 
     scale_fill_manual(values = c("Convencional" = "darkviolet", "Guiada" = "blue3", "Total" = "cyan3")) +
     labs(title = title,
          y = if (show_y_label) y_label else NULL,
-         x = "Diámetro del Implante") +  # Set x-axis label
+         x = "Diámetro del Implante") +  
     theme_minimal() +
     theme(legend.position = "top")
 }
 
-# Prepare data for each deviation
 angular_diameter_data <- prepare_data_diameter(cleandata, `Desviación angular`)
 coronal_diameter_data <- prepare_data_diameter(cleandata, `Desviación coronal`)
 apical_diameter_data <- prepare_data_diameter(cleandata, `Desviación apical`)
 profundidad_diameter_data <- prepare_data_diameter(cleandata, `Desviación de profundidad`)
 
-# Create each plot with a y-axis label only on one plot
 plot_angular_diameter <- create_plot_diameter(angular_diameter_data, `Desviación angular`, "Desviación Angular", "Media (IC 95%)", TRUE)
 plot_coronal_diameter <- create_plot_diameter(coronal_diameter_data, `Desviación coronal`, "Desviación Coronal", "Media (IC 95%)", FALSE)
 plot_apical_diameter <- create_plot_diameter(apical_diameter_data, `Desviación apical`, "Desviación Apical", "Media (IC 95%)", TRUE)
@@ -400,7 +452,7 @@ ggarrange(plot_angular_diameter, plot_coronal_diameter, plot_apical_diameter, pl
 ```{r}
 #| fig-height: 10
 #| fig-width: 10
-#| fig-cap: "Figura 4: Medias de desviaciones según longitud del implante y tipo de cirugía."
+#| fig-cap: "Figura 5: Medias de desviaciones según longitud del implante y tipo de cirugía."
 
 prepare_data_length <- function(data, var) {
   data_by_length <- data %>%
@@ -451,9 +503,8 @@ ggarrange(plot_angular_length, plot_coronal_length, plot_apical_length, plot_pro
 ```{r}
 #| fig-height: 10
 #| fig-width: 10
-#| fig-cap: "Figura 5: Medias de desviaciones según presencia de alguna enfermedad sitémica y tipo de cirugía."
+#| fig-cap: "Figura 6: Medias de desviaciones según presencia de alguna enfermedad sitémica y tipo de cirugía."
 
-# Function to prepare data for mean and confidence interval by systemic disease
 prepare_data_disease <- function(data, var) {
   data_by_disease <- data %>%
     group_by(`Enfermedad sistémica`, `Tipo de cirugía`) %>%
@@ -467,7 +518,6 @@ prepare_data_disease <- function(data, var) {
   return(data_by_disease)
 }
 
-# Function to create a plot for means by systemic disease
 create_plot_disease <- function(data, var_name, title, y_label, show_y_label = FALSE) {
   ggplot(data, aes(x = `Enfermedad sistémica`, y = mean_val, fill = `Tipo de cirugía`)) +
     geom_bar(stat = "identity", position = position_dodge(width = 0.9), alpha = 0.5) +
@@ -484,19 +534,16 @@ create_plot_disease <- function(data, var_name, title, y_label, show_y_label = F
     theme(legend.position = "top")
 }
 
-# Prepare data for each deviation by systemic disease
 angular_disease_data <- prepare_data_disease(cleandata, `Desviación angular`)
 coronal_disease_data <- prepare_data_disease(cleandata, `Desviación coronal`)
 apical_disease_data <- prepare_data_disease(cleandata, `Desviación apical`)
 profundidad_disease_data <- prepare_data_disease(cleandata, `Desviación de profundidad`)
 
-# Create plots for each deviation
 plot_angular_disease <- create_plot_disease(angular_disease_data, `Desviación angular`, "Desviación Angular", "Media (IC 95%)", TRUE)
 plot_coronal_disease <- create_plot_disease(coronal_disease_data, `Desviación coronal`, "Desviación Coronal", "Media (IC 95%)", FALSE)
 plot_apical_disease <- create_plot_disease(apical_disease_data, `Desviación apical`, "Desviación Apical", "Media (IC 95%)", TRUE)
 plot_profundidad_disease <- create_plot_disease(profundidad_disease_data, `Desviación de profundidad`, "Desviación de Profundidad", "Media (IC 95%)", FALSE)
 
-# Arrange plots in a grid
 ggarrange(plot_angular_disease, plot_coronal_disease, plot_apical_disease, plot_profundidad_disease,
           ncol = 2, nrow = 2, 
           align = "v", heights = c(1, 1),
@@ -554,8 +601,8 @@ gt(all_results)  %>%
 ```{r}
 #| fig-height: 6
 #| fig-width: 6
-#| fig-cap: "Figura 6: Comparación de Medias de Desviaciones según Tipo de Cirugía (Test Mann Whitney)."
-# Calculate means and confidence intervals
+#| fig-cap: "Figura 7: Comparación de Medias de Desviaciones según Tipo de Cirugía (Test Mann Whitney)."
+
 calculate_means_ci <- function(data, var) {
   means_by_surgery <- data %>%
     group_by(`Tipo de cirugía`) %>%
@@ -575,21 +622,17 @@ calculate_means_ci <- function(data, var) {
   return(means_by_surgery)
 }
 
-# Perform the calculations for each variable
 variables <- c("Desviación angular", "Desviación coronal", "Desviación apical", "Desviación de profundidad")
 means_ci_list <- lapply(variables, calculate_means_ci, data = cleandata)
 means_ci_data <- do.call(rbind, means_ci_list)
 
-# Add p-values to the data
 p_values <- sapply(variables, function(var) {
   test_result <- wilcox.test(cleandata[[var]] ~ `Tipo de cirugía`, data = cleandata, exact = FALSE)
   return(test_result$p.value)
 })
 
-# Prepare data for plotting
-means_ci_data$P_Value <- rep(p_values, each = 2) # Two entries per variable for each surgery type
+means_ci_data$P_Value <- rep(p_values, each = 2)
 
-# Create the plot
 ggplot(means_ci_data, aes(x = Variable, y = media, fill = `Tipo de cirugía`)) +
   geom_bar(stat = "identity", position = position_dodge(width = 0.9), alpha = 0.5) +
   geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper), width = 0.2, position = position_dodge(width = 0.8), alpha=0.3) +
@@ -615,8 +658,8 @@ ggplot(means_ci_data, aes(x = Variable, y = media, fill = `Tipo de cirugía`)) +
 ```
 
 ```{r, message=FALSE, results='hide'}
-colnames(cleandata) <- gsub(" ", "_", colnames(cleandata))  # Reemplazar espacios con guiones bajos
-colnames(cleandata) <- gsub("á", "a", colnames(cleandata))  # Reemplazar acentos agudos
+colnames(cleandata) <- gsub(" ", "_", colnames(cleandata))
+colnames(cleandata) <- gsub("á", "a", colnames(cleandata))
 colnames(cleandata) <- gsub("é", "e", colnames(cleandata))
 colnames(cleandata) <- gsub("í", "i", colnames(cleandata))
 colnames(cleandata) <- gsub("ó", "o", colnames(cleandata))
@@ -625,34 +668,26 @@ colnames(cleandata) <- gsub("ú", "u", colnames(cleandata))
 variables_independientes <- c("Longitud_del_implante", "Diametro_del_Implante", "Sector_del_Implante", "Enfermedad_sistemica")
 variables_dependientes <- c("Desviacion_angular", "Desviacion_coronal", "Desviacion_apical", "Desviacion_de_profundidad")
 
-# Crear una lista para almacenar los resultados
 resultados <- list()
 for (indep in variables_independientes) {
     for (dep in variables_dependientes) {
-        # Construir la fórmula
         formula <- as.formula(paste(dep, "~ Tipo_de_cirugia *", indep))
-        
-        # Realizar la prueba Scheirer-Ray-Hare y guardar el resultado sin imprimir
         invisible({
             invisible(resultado <- scheirerRayHare(formula, data = cleandata))
-            # Guardar los resultados en la lista
             resultados[[paste(dep, indep, sep = "_vs_")]] <- resultado
         })
     }
 }
 
-# Crear un data frame para resumir los resultados de interacción
 interaction_summary <- data.frame(Variable_Dependiente = character(),
                                   Variable_Independiente = character(),
                                   H_Statistic_Interaccion = numeric(),
                                   p_value_Interaccion = numeric(),
                                   stringsAsFactors = FALSE)
 
-# Poblar el data frame con los resultados de interacción
 for (name in names(resultados)) {
     invisible({
         res <- resultados[[name]]
-        # Filtrar la fila de la interacción
         interaction_row <- grep("Tipo_de_cirugia:.*", rownames(res))
         if (length(interaction_row) > 0) {
             interaction_summary <- rbind(interaction_summary, data.frame(
@@ -665,9 +700,7 @@ for (name in names(resultados)) {
     })
 }
 
-# Ordenar la tabla por Variable_Dependiente
 interaction_summary <- interaction_summary[order(interaction_summary$Variable_Dependiente),]
-
 interaction_summary$Variable_Independiente <- gsub("_", " ", interaction_summary$Variable_Independiente)
 interaction_summary$Variable_Dependiente <- gsub("_", " ", interaction_summary$Variable_Dependiente)
 interaction_summary$Variable_Dependiente <- gsub("Desviacion", "Desviación", interaction_summary$Variable_Dependiente)
@@ -693,7 +726,6 @@ gt(interaction_summary)  %>%
 cleandata$Tipo_de_cirugia <- as.factor(cleandata$Tipo_de_cirugia)
 cleandata$Sector_del_Implante <- as.factor(cleandata$Sector_del_Implante)
 
-# Realizar la prueba de Dunn
 dunn_result <- dunn.test(cleandata$Desviacion_coronal, cleandata$Tipo_de_cirugia:cleandata$Sector_del_Implante, 
                          method = "bonferroni")
 
@@ -721,7 +753,7 @@ dunn_df %>%
     Estadístico_Z = "Estadístico Z",
     Valor_P_Ajustado = "Valor P Ajustado"
   ) %>% 
-  tab_caption(caption = "Tabla 6: Resultados de la Prueba de Dunn.")
+  tab_caption(caption = "Tabla 6: Resultados de la Prueba de Dunn para Desvicion coronal según Tipo de cirugia y Sector del Implante.")
 
 ```
 
