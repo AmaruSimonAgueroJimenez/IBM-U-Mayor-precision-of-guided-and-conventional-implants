@@ -1,10 +1,11 @@
 ---
 title: "COMPARACIÓN DE LA PRECISIÓN EN LA INSTALACIÓN DE IMPLANTES ENTRE CIRUGÍA CONVENCIONAL Y CIRUGÍA GUIADA ESTÁTICA EN UN CONTEXTO UNIVERSITARIO: ESTUDIO DE COHORTE RETROSPECTIVO"
 author:
-  - name: "Sebastián Leandro Melys Merino"
-    email: "smelys@uc.cl"
-  - name: "Noelle Andrea D’amico Roman"
+  - name: "Dra. Noelle Andrea D’amico Roman"
     email: "nadamico@miuandes.cl"
+  - name: "Dr. Sebastián Leandro Melys Merino"
+    email: "smelys@uc.cl"
+  - name: "Dr. Felipe Marti Collao"
   - name: "Amaru Simón Agüero Jiménez"
     email: "amaru.aguero@umayor.cl"
     orcid: "0000-0001-7336-1833"
